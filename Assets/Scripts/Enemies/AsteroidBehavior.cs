@@ -157,8 +157,10 @@ public class AsteroidBehavior : MonoBehaviour {
 		if (newScale < minimumSize)
 						newScale = minimumSize;
 
-
-		transform.localScale  = new Vector3(newScale*10, newScale*10, newScale*10);
+		var par = transform.parent;
+		transform.parent = null;
+		transform.localScale  = new Vector3(newScale, newScale, newScale);
+		transform.parent = par;
 
 
 	}
