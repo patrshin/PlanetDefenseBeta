@@ -1,11 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Enemies\AsteroidBehavior.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Player\PlayerController.cs">
     <Files>
-      <File FileName="Assets\Scripts\Enemies\AsteroidSpawner.cs" Line="63" Column="77" />
+      <File FileName="Assets\Scripts\Enemies\AsteroidSpawner.cs" Line="72" Column="21" />
       <File FileName="Assets\Scripts\Player\PlayerController.cs" Line="122" Column="4" />
       <File FileName="Assets\Scripts\Enemies\AsteroidMesh.cs" Line="2" Column="15" />
-      <File FileName="Assets\Scripts\Enemies\AsteroidBehavior.cs" Line="202" Column="1" />
+      <File FileName="Assets\Scripts\Enemies\AsteroidBehavior.cs" Line="157" Column="30" />
       <File FileName="Assets\Scripts\Enemies\CrackedAsteroid.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
