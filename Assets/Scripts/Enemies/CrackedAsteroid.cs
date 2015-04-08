@@ -30,7 +30,9 @@ public class CrackedAsteroid : MonoBehaviour {
 			for(int i = 0; i < numChildren; ++i) {
 				GameObject o = (GameObject) Instantiate(asteroid);
 
-
+				o.transform.parent = transform.parent;
+				var par = transform.parent;
+				transform.parent = null;
 
 				o.transform.position = transform.position + 
 					new Vector3(
@@ -42,6 +44,10 @@ public class CrackedAsteroid : MonoBehaviour {
 				o.GetComponent<Rigidbody>().velocity = 
 					Quaternion.Euler(0, 0, Util.getAngleVector(
 						contact_pt, o.transform.position)) * (rigidbody.velocity);
+				transform.parent = par;
+
+			//o.transform.parent = par;
+
 				
 			}
 		//}
