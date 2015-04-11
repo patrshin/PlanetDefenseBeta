@@ -16,7 +16,7 @@ public class level1_boss_spawner : MonoBehaviour {
 	float time = 0;
 	
 	
-	bool spawn = true;
+	public bool spawn = true;
 	
 	
 	// Use this for initialization
