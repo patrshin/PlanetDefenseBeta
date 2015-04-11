@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		var inputDevice = (playerNum == 1) ? null: InputManager.Devices[0];
+		//var inputDevice = (playerNum == 1) ? InputManager.Devices[1]: InputManager.Devices[0];
 
 		if (inputDevice == null)
 		{
@@ -172,11 +173,6 @@ public class PlayerController : MonoBehaviour {
 			power_timer -= Time.deltaTime;
 		else
 			applyPower ("ResetPower");
-
-		if(refill == true){
-			p1_fuel_bar.fillAmount += Time.deltaTime / fuel_auto_fill_rate;
-			p2_fuel_bar.fillAmount += Time.deltaTime / fuel_auto_fill_rate;
-		}
 
 	}
 
@@ -354,7 +350,6 @@ public class PlayerController : MonoBehaviour {
 						child.GetComponent<ParticleSystem>().enableEmission = true;
 					}
 				}
-				refill = false;
 			}
 		}
 		else {
@@ -368,6 +363,15 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			refill = true;
+
+			if(playerNum == 0){
+				p1_fuel_bar.fillAmount += Time.deltaTime / fuel_auto_fill_rate;
+			}
+			
+			if(playerNum == 1){
+				p2_fuel_bar.fillAmount += Time.deltaTime / fuel_auto_fill_rate;
+			}
+
 		}
 		planetPos = transform.parent.GetComponent<Transform> ().transform.position;
 
