@@ -70,10 +70,10 @@ public class ObjectiveMarker : MonoBehaviour {
 
 		
 		time += Time.deltaTime;
-		float alpha = .5f + .5f*Mathf.Sin(2*time);
+		float alpha = .5f + .5f*Mathf.Sin(4*time);
 		transform.localScale = new Vector3 (
-			originalScaleX + originalScaleX * Mathf.Sin (time*3)*.3f,
-			originalScaleY + originalScaleY * Mathf.Sin (time*3)*.3f,
+			originalScaleX + originalScaleX * Mathf.Sin (time*3)*.6f,
+			originalScaleY + originalScaleY * Mathf.Sin (time*3)*.6f,
 			1
 		);
 
