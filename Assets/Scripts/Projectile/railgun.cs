@@ -32,7 +32,7 @@ public class railgun : MonoBehaviour {
 	}
 
 	void ShootSuper() {
-		if (transform.localScale.x < 30) {
+		if (transform.localScale.x < 35) {
 			Vector3 expanded = transform.localScale;
 			expanded.x += 1f;
 			transform.localScale = expanded;
@@ -41,7 +41,7 @@ public class railgun : MonoBehaviour {
 		} else {
 			if (transform.localScale.y > 0.1) {
 				Vector3 expanded = transform.localScale;
-				expanded.y -= 0.02f;
+				expanded.y -= 0.05f;
 				transform.localScale = expanded;
 			}
 			else {
@@ -53,7 +53,7 @@ public class railgun : MonoBehaviour {
 			foreach (Transform child in allChildren) {
 				if (child.name == "ExpandedBeam" && child.GetComponent<Transform>().localScale.y < 4) {
 					Vector3 expanded = child.GetComponent<Transform>().localScale;
-					expanded.y += 0.1f;
+					expanded.y += 0.4f;
 					child.GetComponent<Transform>().localScale = expanded;
 				}
 			}
@@ -63,7 +63,7 @@ public class railgun : MonoBehaviour {
 
 	// Update is called once per frame
 	void Shoot () {
-		if (transform.localScale.x < 45) {
+		if (transform.localScale.x < 35) {
 			Vector3 expanded = transform.localScale;
 			expanded.x += 1f;
 			transform.localScale = expanded;
@@ -72,7 +72,7 @@ public class railgun : MonoBehaviour {
 		} else {
 			if (transform.localScale.y > 0.1) {
 				Vector3 expanded = transform.localScale;
-				expanded.y -= 0.01f;
+				expanded.y -= 0.05f;
 				transform.localScale = expanded;
 			}
 			else {
@@ -84,7 +84,7 @@ public class railgun : MonoBehaviour {
 			foreach (Transform child in allChildren) {
 				if (child.name == "ExpandedBeam" && child.GetComponent<Transform>().localScale.y < 2) {
 					Vector3 expanded = child.GetComponent<Transform>().localScale;
-					expanded.y += 0.1f;
+					expanded.y += 0.4f;
 					child.GetComponent<Transform>().localScale = expanded;
 				}
 			}

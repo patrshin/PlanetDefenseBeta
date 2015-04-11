@@ -268,8 +268,8 @@ public class PlayerController : MonoBehaviour {
 		//Shooting Controls
 		if (inputDevice.RightBumper) {
 			railgunTimer += Time.deltaTime;
-			if (railgunTimer > 0.2 && railgunTimer < railgunChargeUp) {
-				GetComponent<Light>().intensity += Time.deltaTime*2;
+			if (railgunTimer < railgunChargeUp) {
+				GetComponent<Light>().intensity += Time.deltaTime;
 			}
 			if (railgunTimer > railgunChargeUp) {
 				Transform[] allChildren = GetComponentsInChildren<Transform>();
