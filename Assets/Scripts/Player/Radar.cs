@@ -54,6 +54,7 @@ public class Radar : MonoBehaviour {
 	}
 
 	void generateBlips() {
+		RadarBlip.RemoveBlips();
 		gatherObjects ();
 		//Debug.Log (range);
 		foreach (GameObject obj in blipObjects) {
