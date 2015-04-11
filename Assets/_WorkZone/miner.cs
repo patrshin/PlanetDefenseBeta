@@ -23,6 +23,8 @@ public class miner : MonoBehaviour {
 
 	public float hp;
 
+	public float follow_x;
+
 	bool start_follow = false;
 	
 	// Use this for initialization
@@ -34,7 +36,7 @@ public class miner : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if(Planet.transform.position.x > 440f)
+		if(Planet.transform.position.x > follow_x)
 			start_follow = true;
 
 		if(start_follow){

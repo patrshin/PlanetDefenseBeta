@@ -82,8 +82,9 @@ public class Projectile : MonoBehaviour {
 		if (other.gameObject.tag == "mine") {
 			GameObject o = (GameObject)Instantiate (explosionPrefab);
 			o.transform.position = gameObject.transform.position;
+			other.gameObject.GetComponent<enemy_mine>().hit = true;
 			Destroy (this.gameObject);
-			Destroy (other.gameObject);
+			//Destroy (other.gameObject);
 		}
 
 		if (other.gameObject.tag == "Boss") {

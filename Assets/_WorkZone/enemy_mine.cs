@@ -15,7 +15,15 @@ public class enemy_mine : MonoBehaviour {
 
 	public float speed;
 
+	public float drop_rate;
+
+	public GameObject fuel1;
+	public GameObject fuel2;
+
 	Image hp;
+
+	[HideInInspector]
+	public bool hit = false;
 	
 	// Use this for initialization
 	void Start () {
@@ -45,6 +53,23 @@ public class enemy_mine : MonoBehaviour {
 		else{
 			flyTimer += Time.deltaTime;
 			transform.position += Vector3.left * Time.deltaTime * speed;
+		}
+
+		if(hit){
+			float drop_num = Random.Range(0f,1f);
+			if(drop_num < drop_rate)
+			{
+				float fuel_pick = Random.Range(0f,1f);
+				if(fuel_pick >= 0.5f){
+					GameObject o = (GameObject)Instantiate (fuel1);
+					o.transform.position = gameObject.transform.position;
+				}
+				else{
+					GameObject o = (GameObject)Instantiate (fuel2);
+					o.transform.position = gameObject.transform.position;
+				}
+			}
+			Destroy(gameObject);
 		}
 
 		
