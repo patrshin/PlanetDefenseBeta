@@ -128,17 +128,24 @@ public class ShieldedShip : MonoBehaviour {
 	}
 
 	void updateRotation() {
-		float properRotation = Util.getAngleVector(transform.position, planetRef.transform.position) + 90;
-		float thisRotation = shipParent.transform.eulerAngles.z;
+		float properRotation = Util.getAngleVector(transform.position, planetRef.transform.position);
+		float thisRotation = shipParent.transform.eulerAngles.z -90;
+	
+		properRotation = properRotation - thisRotation;
 
-		if (properRotation > 180 ) properRotation -= 360; 
-		if (thisRotation > 180) thisRotation -= 360;
 
-		
-		if (thisRotation < properRotation) {
-			shipParent.transform.rotation = Quaternion.Euler(0, 0, thisRotation + rotationalRate);
+		properRotation = (properRotation + 180) % 360 - 180;
+
+
+		Debug.Log (thisRotation + "needs to be " + properRotation);
+
+
+
+
+		if (properRotation > 0 ) {
+			shipParent.transform.rotation = Quaternion.Euler(0, 0, thisRotation + rotationalRate + 90);
 		} else {
-			shipParent.transform.rotation = Quaternion.Euler(0, 0, thisRotation - rotationalRate);
+			shipParent.transform.rotation = Quaternion.Euler(0, 0, thisRotation - rotationalRate + 90);
 		}
 	}
 
