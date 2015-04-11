@@ -61,6 +61,7 @@ public class ShieldedShip : MonoBehaviour {
 		updateSpawn ();
 		updateMovement();
 		updateChildren ();
+		updateRotation();
 	}
 
 
@@ -96,6 +97,7 @@ public class ShieldedShip : MonoBehaviour {
 		}
 
 
+
 	}
 
 	void updateSpawn() {
@@ -125,7 +127,20 @@ public class ShieldedShip : MonoBehaviour {
 		}
 	}
 
+	void updateRotation() {
+		float properRotation = Util.getAngleVector(transform.position, planetRef.transform.position) + 90;
+		float thisRotation = shipParent.transform.eulerAngles.z;
 
+		if (properRotation > 180 ) properRotation -= 360; 
+		if (thisRotation > 180) thisRotation -= 360;
+
+		
+		if (thisRotation < properRotation) {
+			shipParent.transform.rotation = Quaternion.Euler(0, 0, thisRotation + rotationalRate);
+		} else {
+			shipParent.transform.rotation = Quaternion.Euler(0, 0, thisRotation - rotationalRate);
+		}
+	}
 
 
 	
@@ -158,16 +173,6 @@ public class ShieldedShip : MonoBehaviour {
 		shipParent.transform.position = shipParent.transform.position + delta;
 
 
-		float properRotation = Util.getAngleVector(transform.position, target) + 90;
-		if (properRotation < 0) properRotation += 360; 
-
-
-
-		if (shipParent.transform.eulerAngles.z < properRotation) {
-			shipParent.transform.rotation = Quaternion.Euler(0, 0, shipParent.transform.eulerAngles.z + rotationalRate);
-		} else {
-			shipParent.transform.rotation = Quaternion.Euler(0, 0, shipParent.transform.eulerAngles.z - rotationalRate);
-		}
 
 	}
 
