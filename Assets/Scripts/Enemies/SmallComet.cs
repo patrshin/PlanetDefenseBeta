@@ -27,7 +27,7 @@ public class SmallComet : MonoBehaviour {
 	void Start () {
 		GameObject hp_obj = GameObject.Find ("HP");
 		hp_bar = hp_obj.GetComponent<Image> ();
-		planet = GameObject.Find ("planet");
+		planet = GameObject.FindGameObjectWithTag ("planet");
 		flareEffect = GameObject.FindGameObjectWithTag("Effect");
 		baseEffectScaleX = flareEffect.transform.localScale.x;
 		baseEffectScaleY = flareEffect.transform.localScale.y;
