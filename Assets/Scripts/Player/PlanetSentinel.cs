@@ -31,7 +31,7 @@ public class PlanetSentinel : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		Debug.Log (hpred.fillAmount);
+//		Debug.Log (hpred.fillAmount);
 		if (hp.fillAmount < hpred.fillAmount) {
 			hpred.fillAmount -= Time.deltaTime*0.25f;
 		}

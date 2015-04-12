@@ -47,7 +47,7 @@ public class AsteroidSpawner : MonoBehaviour {
 		    (curDistance < maxDistance && 
 		 (curDistance > minDistance))){
 			if(numSpawnPool > 0 && time > spawnCycle){
-				Debug.Log("sweetspot");
+//				Debug.Log("sweetspot");
 				spawnStationary ();
 				numSpawnPool --;
 			}

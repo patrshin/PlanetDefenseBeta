@@ -136,13 +136,13 @@ public class PlayerController : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-		var inputDevice = (playerNum == 1) ? InputManager.Devices[1]: InputManager.Devices[0];
 		//var inputDevice = (playerNum == 1) ? InputManager.Devices[1]: InputManager.Devices[0];
+		var inputDevice = (playerNum == 1) ? null : InputManager.Devices[0];
 
 		if (inputDevice == null)
 		{
 			// If no controller exists for this cube, just make it translucent.
-			Debug.Log("no player");
+			//Debug.Log("no player");
 			renderer.material.color = new Color( 1.0f, 1.0f, 1.0f, 0.2f );
 			//Destroy(this.gameObject);
 		}
@@ -334,7 +334,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else {
 			if (railgunTimer > railgunChargeUp) {
-				Debug.Log(railgunTimer);
+				//Debug.Log(railgunTimer);
 				shootRailgun ();
 			}
 			Transform[] allChildren = GetComponentsInChildren<Transform>();
@@ -444,7 +444,7 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionEnter(Collision c){
 		if (c.gameObject.CompareTag ("Player")) {
 			combined = true;
-			Debug.Log ("Combined");
+			//Debug.Log ("Combined");
 		}
 
 		if (c.gameObject.CompareTag ("p1_fuel") && playerNum == 0) {
@@ -520,7 +520,7 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionExit(Collision c){
 		if (c.gameObject.CompareTag ("Player")) {
 			combined = false;
-			Debug.Log ("Separated");
+//			Debug.Log ("Separated");
 		}
 	}
 

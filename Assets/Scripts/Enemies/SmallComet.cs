@@ -34,7 +34,7 @@ public class SmallComet : MonoBehaviour {
 		targetPos = planet.transform.position;
 		transform.LookAt (targetPos);	
 		direction = Vector3.Normalize(targetPos-this.transform.position);
-		Debug.Log (direction);
+//		Debug.Log (direction);
 
 	}
 	

@@ -27,7 +27,7 @@ public class SmallCometSpawner : MonoBehaviour {
 				                                    (Random.value>.5f?-1:1)*Random.Range (80f,70f) + transform.position.y, 0);
 				time = 0f;
 				nextSpawn = Random.Range (spawnAverage-5f,spawnAverage);
-				Debug.Log(nextSpawn);
+				//Debug.Log(nextSpawn);
 			}
 		}
 		//Set condition here if you want to turn on smallComet spawn
