@@ -56,6 +56,12 @@ public class AlienPlanet : MonoBehaviour {
 
 		activePlanet = this.renderer.isVisible;
 		if (activePlanet) {
+			Transform[] allChildren = GetComponentsInChildren<Transform>();
+			foreach (Transform child in allChildren) {
+				if (child.name == "Center2") {
+					child.GetComponent<Transform>().Rotate(Vector3.forward * Time.deltaTime * 50f);
+				}
+			}
 			if (shootingTimer > shootingCooldown && burstCount < burstTotal) {
 				if (burstTimer > burstCooldown) {
 					for (int x = 1; x <= 3; x++) {

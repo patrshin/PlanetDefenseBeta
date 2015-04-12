@@ -18,14 +18,23 @@ public class PlanetSentinel : MonoBehaviour {
 	float deathTimer = 0f;
 
 
+	Image hpred;
+
+
 	// Use this for initialization
 	void Start () {
 		hp = GameObject.Find ("HP").GetComponent<Image>();
+		hpred = GameObject.Find ("HPRed").GetComponent <Image>();
 		earthRender = GetComponent<MeshRenderer> ();
 	}
-	
+
 	// Update is called once per frame
 	void FixedUpdate () {
+
+		Debug.Log (hpred.fillAmount);
+		if (hp.fillAmount < hpred.fillAmount) {
+			hpred.fillAmount -= Time.deltaTime*0.25f;
+		}
 
 		if (Input.GetKey (KeyCode.Alpha1)) {
 			Application.LoadLevel ("Level_1");
