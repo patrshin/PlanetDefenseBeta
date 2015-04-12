@@ -63,9 +63,7 @@ public class SmallComet : MonoBehaviour {
 		if(c.gameObject.CompareTag ("Planet")) {
 			hp_bar.fillAmount -= 0.125f;
 			Destroy(gameObject);
-			
-			if(hp_bar.fillAmount == 0)
-				Application.LoadLevel ("End");
+
 		}
 	}
 }
