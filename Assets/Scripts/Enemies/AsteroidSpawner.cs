@@ -45,7 +45,7 @@ public class AsteroidSpawner : MonoBehaviour {
 		 (curDistance > minDistance))){
 			if(numSpawnPool > 0 && time > spawnCycle){
 				Debug.Log("sweetspot");
-				spawn ();
+				spawnStationary ();
 				numSpawnPool --;
 			}
 		}
@@ -59,7 +59,12 @@ public class AsteroidSpawner : MonoBehaviour {
 		}
 	}
 
-	void spawn() {
+	void spawnStationary() {
+		GameObject o = spawn ();
+		o.transform.parent = transform;
+	}
+
+	GameObject spawn() {
 		GameObject o = (GameObject)Instantiate (Random.value>.1f?asteroidType1 : asteroidType2);
 		o.transform.position = transform.position + 
 			new Vector3(Random.Range(-1*spawnRange,spawnRange),Random.Range (-1*spawnRange,spawnRange),0);
@@ -69,10 +74,8 @@ public class AsteroidSpawner : MonoBehaviour {
 		o.GetComponent<AsteroidPhysics> ().initialVelocity = 
 			(Planet.transform.position - transform.position).normalized * Random.value * 1.5f;
 		time = 0f;
-		o.transform.parent = transform;
+		return o;
 	}
-
-
 
 
 
