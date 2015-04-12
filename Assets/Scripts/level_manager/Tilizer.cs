@@ -25,13 +25,18 @@ public class Tilizer : MonoBehaviour {
 		}
 
 		cameraRef = GameObject.FindObjectOfType<Camera>().gameObject;
+
 		GameObject test = (GameObject) Instantiate (instance);
 		imageSize = test.transform.lossyScale;
 		Debug.Log (imageSize);
+		test.transform.parent = transform;	
 		tiles.Add(test);
 
+		GameObject nextTile;
 		for(int i = 1; i < TileCoverage*TileCoverage; ++i) {
-			tiles.Add ((GameObject) Instantiate (instance));
+			nextTile = (GameObject) Instantiate (instance);
+			nextTile.transform.parent = transform;
+			tiles.Add (nextTile);
 		}
 
 	}
