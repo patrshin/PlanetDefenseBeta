@@ -99,76 +99,147 @@ public class LaserPhysics2 : MonoBehaviour {
 			}
 		}
 
-		if(Physics.SphereCast (ray, ray_radius, out hit, ray_length, collisionMask2)) {
+		
+//		if(Physics.SphereCast (ray, ray_radius, out hit, ray_length, collisionMask2)) {
+//
+//			Debug.Log("hit with aliens");
+//
+//			if(hit.transform.gameObject.CompareTag("miner")) {
+//				if(playerNum == 0){
+//					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+//						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+//						hit.transform.gameObject.GetComponent<miner>().hp--;
+//					}
+//				}
+//				
+//				if(playerNum == 1){
+//					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+//						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+//						hit.transform.gameObject.GetComponent<miner>().hp--;
+//					}
+//				}
+//			}
+//
+//			if(hit.transform.gameObject.CompareTag("starFighter")) {
+//				if(playerNum == 0){
+//					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+//						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+//						hit.transform.gameObject.GetComponent<StarFighter>().Health--;
+//					}
+//				}
+//				
+//				if(playerNum == 1){
+//					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+//						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+//						hit.transform.gameObject.GetComponent<StarFighter>().Health--;
+//					}
+//				}
+//			}
+//
+//			if(hit.transform.gameObject.CompareTag("starTurret")) {
+//				if(playerNum == 0){
+//					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+//						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+//						hit.transform.gameObject.GetComponent<StarTurret>().Health = 0;
+//					}
+//				}
+//				
+//				if(playerNum == 1){
+//					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+//						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+//						hit.transform.gameObject.GetComponent<StarTurret>().Health = 0;
+//					}
+//				}
+//
+//			}
+//
+//			if(hit.transform.gameObject.CompareTag("starPlanet")) {
+//				if(playerNum == 0){
+//					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+//						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+//						hit.transform.gameObject.GetComponent<AlienPlanet>().health.takeDamage(999);
+//					}
+//				}
+//				
+//				if(playerNum == 1){
+//					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+//						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+//						hit.transform.gameObject.GetComponent<AlienPlanet>().health.takeDamage(999);
+//					}
+//				}
+//			}
+//
+//			
+//		}
 
-			Debug.Log("hit with aliens");
-
-			if(hit.transform.gameObject.CompareTag("miner")) {
-				if(playerNum == 0){
-					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
-						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
-						hit.transform.gameObject.GetComponent<miner>().hp--;
+		RaycastHit[] sphereHits2 = Physics.SphereCastAll(ray, ray_radius, ray_length, collisionMask2);
+		if (sphereHits2.Length != 0) {
+			for(int i = 0; i<sphereHits2.Length; i++) {
+				if(sphereHits2[i].transform.gameObject.CompareTag("miner")) {
+					if(playerNum == 0){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<miner>().hp--;
+						}
+					}
+					
+					if(playerNum == 1){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<miner>().hp--;
+						}
 					}
 				}
 				
-				if(playerNum == 1){
-					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
-						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
-						hit.transform.gameObject.GetComponent<miner>().hp--;
+				if(sphereHits2[i].transform.gameObject.CompareTag("starFighter")) {
+					if(playerNum == 0){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<StarFighter>().Health--;
+						}
 					}
-				}
-			}
-
-			if(hit.transform.gameObject.CompareTag("starFighter")) {
-				if(playerNum == 0){
-					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
-						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
-						hit.transform.gameObject.GetComponent<StarFighter>().Health--;
-					}
-				}
-				
-				if(playerNum == 1){
-					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
-						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
-						hit.transform.gameObject.GetComponent<StarFighter>().Health--;
-					}
-				}
-			}
-
-			if(hit.transform.gameObject.CompareTag("starTurret")) {
-				if(playerNum == 0){
-					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
-						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
-						hit.transform.gameObject.GetComponent<StarTurret>().Health = 0;
+					
+					if(playerNum == 1){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<StarFighter>().Health--;
+						}
 					}
 				}
 				
-				if(playerNum == 1){
-					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
-						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
-						hit.transform.gameObject.GetComponent<StarTurret>().Health = 0;
+				if(sphereHits2[i].transform.gameObject.CompareTag("starTurret")) {
+					if(playerNum == 0){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<StarTurret>().Health = 0;
+						}
 					}
-				}
-
-			}
-
-			if(hit.transform.gameObject.CompareTag("starPlanet")) {
-				if(playerNum == 0){
-					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
-						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
-						hit.transform.gameObject.GetComponent<AlienPlanet>().health.takeDamage(999);
+					
+					if(playerNum == 1){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<StarTurret>().Health = 0;
+						}
 					}
+					
 				}
 				
-				if(playerNum == 1){
-					if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
-						hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
-						hit.transform.gameObject.GetComponent<AlienPlanet>().health.takeDamage(999);
+				if(sphereHits2[i].transform.gameObject.CompareTag("starPlanet")) {
+					if(playerNum == 0){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<AlienPlanet>().health.takeDamage(999);
+						}
+					}
+					
+					if(playerNum == 1){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<AlienPlanet>().health.takeDamage(999);
+						}
 					}
 				}
 			}
-
-			
 		}
 
 		if(Physics.SphereCast (ray, ray_radius, out hit, ray_length, collisionMask3)) {

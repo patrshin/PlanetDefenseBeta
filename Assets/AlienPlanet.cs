@@ -6,6 +6,7 @@ public class AlienPlanet : MonoBehaviour {
 	public bool activePlanet;
 	public GameObject projectile;
 	public GameObject explosionPrefab;
+	public GameObject planet;
 
 	private float shootingTimer;
 	public float shootingCooldown;
@@ -28,6 +29,7 @@ public class AlienPlanet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		planet = GameObject.Find ("planet");
 		Transform[] allChildren = GetComponentsInChildren<Transform>();
 		foreach (Transform child in allChildren) {
 			if (child.name == "Center") {
@@ -40,7 +42,6 @@ public class AlienPlanet : MonoBehaviour {
 	void Update () {
 		if (colorChanged) {
 			colorChangeTimer += Time.deltaTime;
-			Debug.Log(colorChangeTimer);
 			if (colorChangeTimer > colorChangeCooldown) {
 				Transform[] allChildren = GetComponentsInChildren<Transform>();
 				foreach (Transform child in allChildren) {
