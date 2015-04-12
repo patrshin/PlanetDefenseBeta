@@ -77,23 +77,26 @@ public class LaserPhysics2 : MonoBehaviour {
 
 		if(ray_radius == 0)
 			ray_radius = 0.1f;
+		
 
-
-		if(Physics.SphereCast (ray, ray_radius, out hit, ray_length, collisionMask)) {
-			if(playerNum == 0){
-				if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
-					hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
-					hit.transform.gameObject.GetComponent<Health>().takeDamage(25);
+		RaycastHit[] sphereHits = Physics.SphereCastAll(ray, ray_radius, ray_length, collisionMask);
+		if (sphereHits.Length != 0) {
+			for(int i = 0; i<sphereHits.Length; i++)
+			{
+				if(playerNum == 0){
+					if (!sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+						sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+						sphereHits[i].transform.gameObject.GetComponent<Health>().takeDamage(25);
+					}
+				}
+					
+				if(playerNum == 1){
+					if (!sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+						sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+						sphereHits[i].transform.gameObject.GetComponent<Health>().takeDamage(25);
+					}
 				}
 			}
-
-			if(playerNum == 1){
-				if (!hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
-					hit.transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
-					hit.transform.gameObject.GetComponent<Health>().takeDamage(25);
-				}
-			}
-
 		}
 
 		if(Physics.SphereCast (ray, ray_radius, out hit, ray_length, collisionMask2)) {
