@@ -26,7 +26,7 @@ public class StarFighter : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		planetPos = GameObject.Find ("planet").transform.position;
+		planetPos = GameObject.FindGameObjectWithTag ("Planet").transform.position;
 		planetAngle = Util.getAngleVector (transform.position, planetPos) + 270;
 		planetDistance = Vector3.Distance (planetPos, transform.position);
 		transform.eulerAngles = new Vector3 (0, 0, planetAngle);
@@ -37,7 +37,7 @@ public class StarFighter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		relativeDistance = transform.position - planetPos;
-		planetPos = GameObject.Find ("planet").transform.position;
+		planetPos = GameObject.FindGameObjectWithTag ("Planet").transform.position;
 		//If they don't reach the planet move towards it
 	}
 
