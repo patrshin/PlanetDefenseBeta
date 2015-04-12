@@ -9,21 +9,12 @@ public class SplitProjectile : MonoBehaviour {
 	public float			numBullets;
 	public InputDevice		inputDev = null;
 
-	private float 			time;
-	private float			waitTime = 1;
 	private float 			slice;
 	// Use this for initialization
 	void Start () {
 		slice = 360 / numBullets;
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-		time += Time.fixedDeltaTime;
-		if (time > waitTime && inputDev != null && inputDev.LeftBumper.IsPressed) {
-			Destroy (this.gameObject);
-		}
-	}
+
 
 	void OnDestroy(){
 		float angle_from_planet = Util.getAngleVector (GameObject.FindGameObjectWithTag ("Planet").transform.position, transform.position) - 90;

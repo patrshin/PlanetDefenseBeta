@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void shootSecondary() {
-		GameObject o = shootProjectile (projectilePrefab2, 0, 200);
+		GameObject o = shootProjectile (projectilePrefab2, 0, 450);
 		//This Lines specific to Mine's 
 		//o.GetComponent<Transform>().eulerAngles = new Vector3(0,0,transform.eulerAngles.z-90f);
 		sound_basic.Play ();
