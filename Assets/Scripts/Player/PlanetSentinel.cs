@@ -4,6 +4,9 @@ using System.Collections;
 
 public class PlanetSentinel : MonoBehaviour {
 
+
+	public GameObject expPrefab;
+
 	Image hp;
 	const int healthScale = 100;
 	int fixedHealth = healthScale;
@@ -11,6 +14,8 @@ public class PlanetSentinel : MonoBehaviour {
 	Material origMat;
 	Color origColor;
 	bool hurtAnimationActive = false;
+	bool deathAnimationActive = false;
+	float deathTimer = 0f;
 
 
 	// Use this for initialization
@@ -52,7 +57,13 @@ public class PlanetSentinel : MonoBehaviour {
 		}
 
 		if (hp.fillAmount <= 0) {
-			LiveController.LoseLife();
+			deathAnimationActive = true;
+		}
+
+
+
+		if (deathAnimationActive) {
+			deathAnimation();
 		}
 
 
@@ -71,7 +82,24 @@ public class PlanetSentinel : MonoBehaviour {
 
 
 	}
-	
 
+
+	void deathAnimation() {
+		deathTimer += Time.deltaTime;
+
+		if (Random.value > .7f) {
+			GameObject exp = (GameObject)Instantiate (expPrefab);
+			exp.transform.position = transform.position + new Vector3 (Random.Range (-5, 5), Random.Range (-5, 5), -3);
+			GameObject.FindObjectOfType<Camera>().gameObject.transform.position = 
+				GameObject.FindObjectOfType<Camera>().gameObject.transform.position 
+					+ new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
+		}
+
+		PlanetHurt ();
+
+		if (deathTimer > 4) {
+						LiveController.LoseLife ();
+		}
+	}
 
 }
