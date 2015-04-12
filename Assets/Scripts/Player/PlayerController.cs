@@ -209,6 +209,7 @@ public class PlayerController : MonoBehaviour {
 	void shootRailgun() {
 		GameObject o = shootProjectile (railgunPrefab, 0, 1);
 		o.transform.position = transform.position;
+		o.GetComponent<LaserPhysics2> ().playerNum = playerNum;
 		o.GetComponent<railgun> ().angle = this.transform.localPosition;
 		o.GetComponent<Transform>().eulerAngles = new Vector3(0,0,transform.eulerAngles.z);
 		//Debug.Log (transform.localPosition);

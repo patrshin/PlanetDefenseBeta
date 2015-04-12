@@ -3,13 +3,13 @@ using System.Collections;
 
 public class EnemyLaserBehavior : MonoBehaviour {
 
-	bool god_mode1;
-	bool hit1 = false;
+	public bool god_mode1;
+	public bool hit1 = false;
 	float gmode_delay1 = 2f;
 	float gmode_time1;
 
-	bool god_mode2;
-	bool hit2 = false;
+	public bool god_mode2;
+	public bool hit2 = false;
 	float gmode_delay2 = 2f;
 	float gmode_time2;
 
