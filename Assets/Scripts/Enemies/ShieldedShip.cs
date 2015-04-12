@@ -137,7 +137,6 @@ public class ShieldedShip : MonoBehaviour {
 		properRotation = (properRotation + 180) % 360 - 180;
 
 
-		Debug.Log (thisRotation + "needs to be " + properRotation);
 
 
 

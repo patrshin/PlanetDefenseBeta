@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-		var inputDevice = (playerNum == 1) ? null: InputManager.Devices[0];
+		var inputDevice = (playerNum == 1) ? InputManager.Devices[1]: InputManager.Devices[0];
 		//var inputDevice = (playerNum == 1) ? InputManager.Devices[1]: InputManager.Devices[0];
 
 		if (inputDevice == null)
@@ -292,7 +292,7 @@ public class PlayerController : MonoBehaviour {
 					}
 				}
 
-				else if((combined && combinedTimer >= combinedCoolDown) ){
+				else if(canSuperShot() ){
 					combinedTimer = 0f;
 					shootCombined();
 
@@ -485,6 +485,16 @@ public class PlayerController : MonoBehaviour {
 			combined = false;
 			Debug.Log ("Separated");
 		}
+	}
+
+	public bool canSuperShot() {
+		return (combined && combinedTimer >= combinedCoolDown);
+	}
+	//returns percentage of superShot fill
+	public float getSuperShotStatus() {
+		return combinedTimer < combinedCoolDown ? 
+			   combinedTimer / combinedCoolDown
+				: 1f;
 	}
 
 

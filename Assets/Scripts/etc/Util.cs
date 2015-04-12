@@ -25,6 +25,16 @@ public class Util : MonoBehaviour {
 	}
 
 
+	static public float getSmallestAngle(float source, float dest) {
+		dest = dest - source;
+		dest = (dest + 180) % 360 - 180;
+		return dest;
+	}
 
+	static public float getMeanAngle(float a1, float a2) {
+		Vector2 v1 = new Vector2(Mathf.Cos (a1*Mathf.Deg2Rad)*100, Mathf.Sin(a1* Mathf.Deg2Rad)*100);
+		Vector2 v2 = new Vector2(Mathf.Cos (a2*Mathf.Deg2Rad)*100, Mathf.Sin(a2* Mathf.Deg2Rad)*100);
+		return getAngleVector (v1+v2, new Vector2(1, 0)) + 180;
+	}
 
 }
