@@ -31,7 +31,10 @@ public class AsteroidSpawner : MonoBehaviour {
 		numSpawnPool = numSpawn;
 		Planet = GameObject.Find ("planet");
 		if (spawnInitially) {
-			spawn ();
+			if (stationary) 
+				spawnStationary();
+			else
+				spawn ();
 		}
 	}
 	

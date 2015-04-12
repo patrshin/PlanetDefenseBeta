@@ -46,6 +46,10 @@ public class PlayerController : MonoBehaviour {
 
 	public bool combined;
 
+	public bool unlimitedFuel;
+
+	private bool soundOff = false;
+
 	bool refill;
 
 	Image	p1_cd_bar;
@@ -248,6 +252,9 @@ public class PlayerController : MonoBehaviour {
 
 //		planetPos = transform.parent.GetComponent<Transform> ().transform.position;
 
+		if (unlimitedFuel) {
+			return;
+		}
 		if (playerNum == 0) {
 			p1_fuel_bar.fillAmount -= Time.deltaTime/(fuel_dec_rate + fuel_modifier);
 		}
