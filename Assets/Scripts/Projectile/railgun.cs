@@ -32,7 +32,7 @@ public class railgun : MonoBehaviour {
 	}
 
 	void ShootSuper() {
-		if (transform.localScale.x < 35) {
+		if (transform.localScale.x < 45) {
 			Vector3 expanded = transform.localScale;
 			expanded.x += 1f;
 			transform.localScale = expanded;
@@ -63,7 +63,7 @@ public class railgun : MonoBehaviour {
 
 	// Update is called once per frame
 	void Shoot () {
-		if (transform.localScale.x < 35) {
+		if (transform.localScale.x < 45) {
 			Vector3 expanded = transform.localScale;
 			expanded.x += 1f;
 			transform.localScale = expanded;

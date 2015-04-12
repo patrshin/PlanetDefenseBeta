@@ -274,12 +274,18 @@ public class PlayerController : MonoBehaviour {
 			railgunTimer += Time.deltaTime;
 			if (railgunTimer < railgunChargeUp) {
 				GetComponent<Light>().intensity += Time.deltaTime;
+				Transform[] allChildren = GetComponentsInChildren<Transform>();
+				foreach (Transform child in allChildren) {
+					if (child.name == "ChargedUp") {
+						child.GetComponent<Image>().fillAmount = railgunTimer/railgunChargeUp;
+					}
+				}
 			}
 			if (railgunTimer > railgunChargeUp) {
 				Transform[] allChildren = GetComponentsInChildren<Transform>();
 				foreach (Transform child in allChildren) {
 					if (child.name == "ChargedUp") {
-						child.GetComponent<ParticleSystem>().enableEmission = true;
+						child.GetComponent<Image>().fillAmount = 1;
 					}
 				}
 			}
@@ -324,7 +330,7 @@ public class PlayerController : MonoBehaviour {
 			Transform[] allChildren = GetComponentsInChildren<Transform>();
 			foreach (Transform child in allChildren) {
 				if (child.name == "ChargedUp") {
-					child.GetComponent<ParticleSystem>().enableEmission = false;
+					child.GetComponent<Image>().fillAmount = 0;
 				}
 			}
 			GetComponent<Light>().intensity = 0;
