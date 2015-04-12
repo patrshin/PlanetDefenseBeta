@@ -346,10 +346,22 @@ public class PlayerController : MonoBehaviour {
 				Transform[] allChildren = GetComponentsInChildren<Transform>();
 				foreach (Transform child in allChildren) {
 					if (child.name == "playerBoost") {
-	
+						if (!child.GetComponent<AudioSource>().isPlaying)
+							child.GetComponent<AudioSource>().Play();
 						child.GetComponent<ParticleSystem>().enableEmission = true;
 					}
 				}
+			}
+			else {
+				Transform[] allChildren = GetComponentsInChildren<Transform>();
+				speed = InitSpeed;
+				foreach (Transform child in allChildren) {
+					if (child.name == "playerBoost") {
+						child.GetComponent<AudioSource>().Stop ();
+						child.GetComponent<ParticleSystem>().enableEmission = false;
+					}
+				}
+
 			}
 		}
 		else {
@@ -357,7 +369,7 @@ public class PlayerController : MonoBehaviour {
 			speed = InitSpeed;
 			foreach (Transform child in allChildren) {
 				if (child.name == "playerBoost") {
-	
+					child.GetComponent<AudioSource>().Stop ();
 					child.GetComponent<ParticleSystem>().enableEmission = false;
 				}
 			}
