@@ -283,33 +283,34 @@ public class PlayerController : MonoBehaviour {
 					}
 				}
 			}
-			if (!projectileButtonDownOnce) {
-				if(!combined && projecitileTimer >= projecitileCoolDown){
+			if (!projectileButtonDownOnce) {				
+				if(canSuperShot() ){
+					combinedTimer = 0f;
+					projecitileTimer = 0f;
+					shootCombined();
+					
+					if(playerNum == 0){
+						p1_comb_cd.fillAmount = 0;
+					}
+					
+					if(playerNum == 1){
+						p2_comb_cd.fillAmount = 0;
+					}
+				}
+
+				else if(projecitileTimer >= projecitileCoolDown){
 					projecitileTimer = 0f;
 					if(super_shot)
 						shootCombined();
 					else
 						shootBasic();
-
+					
 					if(playerNum == 0){
 						p1_cd_bar.fillAmount = 0;
 					}
-
+					
 					if(playerNum == 1){
 						p2_cd_bar.fillAmount = 0;
-					}
-				}
-
-				else if(canSuperShot() ){
-					combinedTimer = 0f;
-					shootCombined();
-
-					if(playerNum == 0){
-						p1_comb_cd.fillAmount = 0;
-					}
-
-					if(playerNum == 1){
-						p2_comb_cd.fillAmount = 0;
 					}
 				}
 			}
