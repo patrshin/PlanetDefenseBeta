@@ -470,15 +470,19 @@ public class PlayerController : MonoBehaviour {
 		//Change Power Icon (UI)
 		//Change Cooldown Timer (code)
 		//Change Cooldown Bar (UI)
+		fuel_bar_tmp = Color.white;
+		fuel_bar_tmp.a = 1f;
 		if (powerType.Contains ("rocketBoost")) {
 			power_timer = 5f;
 			rocket_boost = 2f;
 			fuel_modifier  = 100f;
 
 			if(playerNum == 0){
+				p1_pwr_icon.color = fuel_bar_tmp;
 				p1_pwr_icon.sprite = Resources.Load("booster", typeof(Sprite)) as Sprite;
 				p1_fuel_bar.fillAmount = 1;
 			} else{
+				p2_pwr_icon.color = fuel_bar_tmp;
 				p2_pwr_icon.sprite = Resources.Load("booster", typeof(Sprite)) as Sprite;
 				p2_fuel_bar.fillAmount = 1;
 			}
@@ -488,26 +492,38 @@ public class PlayerController : MonoBehaviour {
 			power_timer = 5f;
 			super_shot = true;
 
-			if(playerNum == 0)
+			if(playerNum == 0){
+				p1_pwr_icon.color = fuel_bar_tmp;
 				p1_pwr_icon.sprite = Resources.Load("superShot", typeof(Sprite)) as Sprite;
-			else
+			}
+			else{
+				p2_pwr_icon.color = fuel_bar_tmp;
 				p2_pwr_icon.sprite = Resources.Load("superShot", typeof(Sprite)) as Sprite;
+			}
 
 		} else if (powerType.Contains ("speedUp")) {
 			power_timer = 5f;
 			speed_modifier = 2f;
 
-			if(playerNum == 0)
+			if(playerNum == 0){
+				p1_pwr_icon.color = fuel_bar_tmp;
 				p1_pwr_icon.sprite = Resources.Load("speedUp", typeof(Sprite)) as Sprite;
-			else
+			}
+			else{
+				p2_pwr_icon.color = fuel_bar_tmp;
 				p2_pwr_icon.sprite = Resources.Load("speedUp", typeof(Sprite)) as Sprite;
+			}
 
 		} else {
-
-			if(playerNum == 0)
+			fuel_bar_tmp.a = 0f;
+			if(playerNum == 0){
+				p1_pwr_icon.color = fuel_bar_tmp;
 				p1_pwr_icon.sprite = null;
-			else
+			}
+			else{
+				p2_pwr_icon.color = fuel_bar_tmp;
 				p2_pwr_icon.sprite = null;
+			}
 
 			rocket_boost = 1f;
 			fuel_modifier = 0f;
