@@ -10,7 +10,7 @@ public class Tilizer : MonoBehaviour {
 	public Vector3 offset;
 
 	public GameObject instance;
-	GameObject        planetRef;
+	GameObject        cameraRef;
 	Vector3           imageSize;
 	List<GameObject>  tiles = new List<GameObject>();
 
@@ -24,7 +24,7 @@ public class Tilizer : MonoBehaviour {
 			return;
 		}
 
-		planetRef = GameObject.FindGameObjectWithTag("Planet");
+		cameraRef = GameObject.FindObjectOfType<Camera>().gameObject;
 		GameObject test = (GameObject) Instantiate (instance);
 		imageSize = test.transform.lossyScale;
 		Debug.Log (imageSize);
@@ -44,15 +44,15 @@ public class Tilizer : MonoBehaviour {
 		// prefab has a child image whose bounds match the scale of the instance object
 
 		float granualizedX = (
-			(Mathf.Round((planetRef.transform.position.x) / imageSize.x))     // base granualization, putting the base image where the planet is 
-		  + ((offset.x + planetRef.transform.position.x*ParalaxDelay) % 1f)   // offset for paralax option + natural offset
+			(Mathf.Round((cameraRef.transform.position.x) / imageSize.x))     // base granualization, putting the base image where the planet is 
+		  + ((offset.x + cameraRef.transform.position.x*ParalaxDelay) % 1f)   // offset for paralax option + natural offset
 		  - TileCoverage/2                                                    // centers the granualization around the planet
 		  
 		);
 
 		float granualizedY = (
-			(Mathf.Round((planetRef.transform.position.y + offset.y) / imageSize.y)) 
-		  + ((offset.y + planetRef.transform.position.y*ParalaxDelay) % 1f)
+			(Mathf.Round((cameraRef.transform.position.y + offset.y) / imageSize.y)) 
+		  + ((offset.y + cameraRef.transform.position.y*ParalaxDelay) % 1f)
 		  - TileCoverage/2
 		);
 
@@ -61,7 +61,7 @@ public class Tilizer : MonoBehaviour {
 				(granualizedX + (i % TileCoverage))* imageSize.x,
 			    (granualizedY + (i / TileCoverage))* imageSize.y,
 			                                 Depth);
-			//Debug.Log (planetRef.transform.position + " -> " + transform.position);
+			//Debug.Log (cameraRef.transform.position + " -> " + transform.position);
 		}
 	}
 }
