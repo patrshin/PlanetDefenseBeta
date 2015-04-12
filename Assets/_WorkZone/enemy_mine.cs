@@ -69,6 +69,8 @@ public class enemy_mine : MonoBehaviour {
 					o.transform.position = gameObject.transform.position;
 				}
 			}
+			GameObject ex = (GameObject)Instantiate (explosionPrefab);
+			ex.transform.position = gameObject.transform.position;
 			Destroy(gameObject);
 		}
 

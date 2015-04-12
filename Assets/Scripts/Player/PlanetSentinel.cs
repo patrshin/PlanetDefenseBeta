@@ -5,6 +5,13 @@ using System.Collections;
 public class PlanetSentinel : MonoBehaviour {
 
 	Image hp;
+	const int healthScale = 100;
+	int fixedHealth = healthScale;
+	MeshRenderer earthRender;
+	Material origMat;
+	Color origColor;
+	bool hurtAnimationActive = false;
+
 
 	Image hpred;
 
@@ -12,9 +19,8 @@ public class PlanetSentinel : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		hp = GameObject.Find ("HP").GetComponent<Image>();
-
-		
 		hpred = GameObject.Find ("HPRed").GetComponent <Image>();
+		earthRender = GetComponent<MeshRenderer> ();
 	}
 
 	// Update is called once per frame
@@ -45,9 +51,34 @@ public class PlanetSentinel : MonoBehaviour {
 			Application.LoadLevel ("level_5_Real");
 		}
 
+		// hurt
+		if ((int)(hp.fillAmount * healthScale) != fixedHealth) {
+			PlanetHurt ();
+		}
+
+		if (hurtAnimationActive) {
+			earthRender.material.color = Color.Lerp(earthRender.material.color, origColor, 0.1f);
+		}
+
 		if (hp.fillAmount <= 0) {
 			LiveController.LoseLife();
 		}
+
+
+
+	}
+
+
+	void PlanetHurt() {
+		if (hurtAnimationActive) {
+			earthRender.material.color = origColor;
+		}
+		origColor = earthRender.material.color;
+		earthRender.material.color = Color.red;
+		hurtAnimationActive = true;
+		fixedHealth = (int)(hp.fillAmount * healthScale);
+
+
 	}
 	
 
