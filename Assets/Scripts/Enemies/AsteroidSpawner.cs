@@ -29,7 +29,7 @@ public class AsteroidSpawner : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		numSpawnPool = numSpawn;
-		Planet = GameObject.Find ("planet");
+		Planet = GameObject.FindGameObjectWithTag ("Planet");
 		if (spawnInitially) {
 			if (stationary) 
 				spawnStationary();
