@@ -13,7 +13,8 @@ public class LiveController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		time = 0f;
-		GetComponentInChildren<Text> ().text = "Lives Left: " + lives;
+		lives = 9999;
+		GetComponentInChildren<Text> ().text = "Get Ready";
 	}
 
 	void Update() {
