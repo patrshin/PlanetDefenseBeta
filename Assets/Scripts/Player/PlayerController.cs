@@ -61,6 +61,8 @@ public class PlayerController : MonoBehaviour {
 	Image	p1_fuel_bar;
 	Image 	p2_fuel_bar;
 
+	Color fuel_bar_tmp;
+
 	//for turret angle limitation
 	private float turretRotationOffset				=	0f;
 
@@ -77,8 +79,8 @@ public class PlayerController : MonoBehaviour {
 	public bool		super_shot = false;
 	public float	rocket_boost = 1f;
 	public float	fuel_modifier = 0f;
-	SpriteRenderer	p1_pwr_icon;
-	SpriteRenderer	p2_pwr_icon;
+	Image	p1_pwr_icon;
+	Image	p2_pwr_icon;
 	Image	p1_pwr_bar;
 	Image	p2_pwr_bar;
 
@@ -90,11 +92,11 @@ public class PlayerController : MonoBehaviour {
 		GameObject p2_cd_obj = GameObject.Find ("p2_cd");
 		p2_cd_bar = p2_cd_obj.GetComponent<Image> ();
 
-		GameObject p1_comb_obj = GameObject.Find ("p1_comb_cd");
-		p1_comb_cd = p1_comb_obj.GetComponent<Image> ();
-
-		GameObject p2_comb_obj = GameObject.Find ("p2_comb_cd");
-		p2_comb_cd = p2_comb_obj.GetComponent<Image> ();
+//		GameObject p1_comb_obj = GameObject.Find ("p1_comb_cd");
+//		p1_comb_cd = p1_comb_obj.GetComponent<Image> ();
+//
+//		GameObject p2_comb_obj = GameObject.Find ("p2_comb_cd");
+//		p2_comb_cd = p2_comb_obj.GetComponent<Image> ();
 
 		GameObject p1_fuel_obj = GameObject.Find ("p1_fuel_bar");
 		p1_fuel_bar = p1_fuel_obj.GetComponent<Image> ();
@@ -106,8 +108,8 @@ public class PlayerController : MonoBehaviour {
 		p2_fuel_bar.fillAmount = start_fuel;
 
 		//PowerUp Cooldown UI Bar Initializaitons
-		p1_pwr_icon = GameObject.Find ("p1_pwr_icon").GetComponent<SpriteRenderer> ();
-		p2_pwr_icon = GameObject.Find ("p2_pwr_icon").GetComponent<SpriteRenderer> ();
+		p1_pwr_icon = GameObject.Find ("p1_pwr_icon").GetComponent<Image> ();
+		p2_pwr_icon = GameObject.Find ("p2_pwr_icon").GetComponent<Image> ();
 		p1_pwr_bar = GameObject.Find ("p1_pwr_cd").GetComponent<Image> ();
 		p2_pwr_bar = GameObject.Find ("p2_pwr_cd").GetComponent<Image> ();
 		p1_pwr_bar.fillAmount = 0;
@@ -134,7 +136,7 @@ public class PlayerController : MonoBehaviour {
 		
 	// Update is called once per frame
 	void Update () {
-		var inputDevice = (playerNum == 1) ? InputManager.Devices[1]: InputManager.Devices[0];
+		var inputDevice = (playerNum == 1) ? null: InputManager.Devices[0];
 		//var inputDevice = (playerNum == 1) ? InputManager.Devices[1]: InputManager.Devices[0];
 
 		if (inputDevice == null)
@@ -164,8 +166,8 @@ public class PlayerController : MonoBehaviour {
 		p1_cd_bar.fillAmount += (Time.deltaTime/(projecitileCoolDown*1.5f));
 		p2_cd_bar.fillAmount += (Time.deltaTime/(projecitileCoolDown*1.5f));
 
-		p1_comb_cd.fillAmount += (Time.deltaTime/(combinedCoolDown*2f));
-		p2_comb_cd.fillAmount += (Time.deltaTime/(combinedCoolDown*2f));
+//		p1_comb_cd.fillAmount += (Time.deltaTime/(combinedCoolDown*2f));
+//		p2_comb_cd.fillAmount += (Time.deltaTime/(combinedCoolDown*2f));
 
 
 		if(playerNum == 0)
@@ -177,6 +179,14 @@ public class PlayerController : MonoBehaviour {
 			power_timer -= Time.deltaTime;
 		else
 			applyPower ("ResetPower");
+
+		fuel_bar_tmp = Color.Lerp(Color.red, Color.green,p1_fuel_bar.fillAmount);
+		fuel_bar_tmp.a = 0.5f;
+		p1_fuel_bar.color = fuel_bar_tmp;
+		
+		fuel_bar_tmp = Color.Lerp(Color.red, Color.green,p2_fuel_bar.fillAmount);
+		fuel_bar_tmp.a = 0.5f;
+		p2_fuel_bar.color = fuel_bar_tmp;
 
 	}
 
@@ -217,13 +227,13 @@ public class PlayerController : MonoBehaviour {
 
 		if((combined && combinedTimer >= combinedCoolDown)){
 			combinedTimer = 0f;
-			if(playerNum == 0){
-				p1_comb_cd.fillAmount = 0;
-			}
-			
-			if(playerNum == 1){
-				p2_comb_cd.fillAmount = 0;
-			}
+//			if(playerNum == 0){
+//				p1_comb_cd.fillAmount = 0;
+//			}
+//			
+//			if(playerNum == 1){
+//				p2_comb_cd.fillAmount = 0;
+//			}
 			o.GetComponent<railgun> ().super = true;
 		}
 		sound_basic.Play ();
@@ -295,13 +305,13 @@ public class PlayerController : MonoBehaviour {
 					projecitileTimer = 0f;
 					shootCombined();
 					
-					if(playerNum == 0){
-						p1_comb_cd.fillAmount = 0;
-					}
-					
-					if(playerNum == 1){
-						p2_comb_cd.fillAmount = 0;
-					}
+//					if(playerNum == 0){
+//						p1_comb_cd.fillAmount = 0;
+//					}
+//					
+//					if(playerNum == 1){
+//						p2_comb_cd.fillAmount = 0;
+//					}
 				}
 
 				else if(projecitileTimer >= projecitileCoolDown){
