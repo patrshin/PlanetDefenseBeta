@@ -36,7 +36,7 @@ public class railgun : MonoBehaviour {
 			Vector3 expanded = transform.localScale;
 			expanded.x += 1f;
 			transform.localScale = expanded;
-			transform.Translate(speed * angle * Time.deltaTime, Space.World);
+			transform.Translate(speed * angle * 2 * Time.deltaTime, Space.World);
 			
 		} else {
 			if (transform.localScale.y > 0.1) {
