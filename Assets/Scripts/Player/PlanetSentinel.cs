@@ -97,8 +97,7 @@ public class PlanetSentinel : MonoBehaviour {
 		deathTimer += Time.deltaTime;
 
 		if (Random.value > .7f) {
-			GameObject exp = (GameObject)Instantiate (expPrefab);
-			exp.transform.position = transform.position + new Vector3 (Random.Range (-5, 5), Random.Range (-5, 5), -3);
+			makeExplosion(5f, 1f);
 			GameObject.FindObjectOfType<Camera>().gameObject.transform.position = 
 				GameObject.FindObjectOfType<Camera>().gameObject.transform.position 
 					+ new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
@@ -106,9 +105,23 @@ public class PlanetSentinel : MonoBehaviour {
 
 		PlanetHurt ();
 
-		if (deathTimer > 4) {
-						LiveController.LoseLife ();
+		if (deathTimer > 4 && deathTimer < 4.5) {
+			if (Random.value > .5f)
+				makeExplosion(.1f, 30f);
+			GetComponent<MeshRenderer>().enabled = false;
 		}
+
+		if (deathTimer > 6) {
+			LiveController.LoseLife ();
+		}
+						
+
+	}
+
+	void makeExplosion(float range, float scale) {
+		GameObject exp = (GameObject)Instantiate (expPrefab);
+		exp.transform.position = transform.position + new Vector3 (Random.Range (-range, range), Random.Range (-range, range), -3);
+		exp.transform.localScale = exp.transform.localScale *= scale;
 	}
 
 }
