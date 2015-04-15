@@ -103,7 +103,7 @@ public class planet_lvl3 : MonoBehaviour {
 		}
 
 		if (lvl5) {
-			if(transform.position.y > -20 || transform.position.y < -60 ||
+			if(transform.position.y > -33 || transform.position.y < -60 ||
 			   transform.position.x > 48 || transform.position.x < -48)
 				transform.position = temp;
 		}

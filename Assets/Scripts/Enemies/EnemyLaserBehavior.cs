@@ -37,7 +37,7 @@ public class EnemyLaserBehavior : MonoBehaviour {
 
 		if (hit2) {
 			god_mode2 = true;
-			gmode_time2 = gmode_delay1;
+			gmode_time2 = gmode_delay2;
 			hit2 = false;
 		}
 		
@@ -45,7 +45,7 @@ public class EnemyLaserBehavior : MonoBehaviour {
 			gmode_time2 -= Time.deltaTime;
 			
 			if(gmode_time2 <= 0f) {
-				god_mode1 = false;
+				god_mode2 = false;
 			}
 			
 		}
