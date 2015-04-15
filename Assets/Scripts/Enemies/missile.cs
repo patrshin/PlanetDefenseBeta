@@ -60,6 +60,7 @@ public class missile : MonoBehaviour {
 			o.transform.position = transform.position;
 			spawner.GetComponent<missile_spawn>().spawnCycle = spawner.GetComponent<missile_spawn>().spawnTime;
 			//boss.GetComponent<boss_ship> ().spawn--;
+			Destroy (other.gameObject);
 			Destroy (this.gameObject);
 		}
 	}
