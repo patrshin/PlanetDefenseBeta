@@ -41,7 +41,7 @@ public class StarTurret : MonoBehaviour {
 		planetAngle = Util.getAngleVector (transform.position, planetPos) + 270;
 		planetDistance = Vector3.Distance (planetPos, transform.position);
 		transform.eulerAngles = new Vector3 (0, 0, planetAngle);
-		Debug.Log (planetAngle);
+		//Debug.Log (planetAngle);
 		timeTilShift = shiftAvg;
 		timeTilStop = movementAvg;
 		if (Random.Range(0f,1f) > 0.5f) {
@@ -53,8 +53,9 @@ public class StarTurret : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		planetPos = GameObject.FindGameObjectWithTag ("Planet").transform.position;
 		relativeDistance = transform.position - planetPos;
-		planetPos = GameObject.Find ("planet").transform.position;
+
 		//If they don't reach the planet move towards it
 	}
 	
@@ -100,7 +101,7 @@ public class StarTurret : MonoBehaviour {
 		if (movementTimer < timeTilStop) {
 			transform.RotateAround(planetPos, Vector3.forward, direction*speedRotate);
 			movementTimer += Time.deltaTime;
-			Debug.Log (movementTimer);
+			//Debug.Log (movementTimer);
 		}
 		else {
 			if (shootTime < 0) {

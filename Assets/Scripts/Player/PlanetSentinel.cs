@@ -98,9 +98,11 @@ public class PlanetSentinel : MonoBehaviour {
 
 		if (Random.value > .7f) {
 			makeExplosion(5f, 1f);
+			/*
 			GameObject.FindObjectOfType<Camera>().gameObject.transform.position = 
 				GameObject.FindObjectOfType<Camera>().gameObject.transform.position 
 					+ new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
+		    */
 		}
 
 		PlanetHurt ();
