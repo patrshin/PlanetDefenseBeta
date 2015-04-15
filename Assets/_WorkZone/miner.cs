@@ -3,6 +3,8 @@ using System.Collections;
 
 public class miner : MonoBehaviour {
 
+	public GameObject explosionPrefab;
+
 	public GameObject Planet;
 	public GameObject spawner;
 	public GameObject mines;
