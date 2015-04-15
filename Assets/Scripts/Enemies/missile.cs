@@ -21,7 +21,7 @@ public class missile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Planet = GameObject.Find ("planet");
+		Planet = GameObject.FindGameObjectWithTag ("Planet");
 		boss = GameObject.Find ("boss");
 		hp = GameObject.Find ("HP").GetComponent<Image>();
 	}

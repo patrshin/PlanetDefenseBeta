@@ -37,7 +37,7 @@ public class StarTurret : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		shootTime = Random.Range (minShootTime, maxShootTime);
-		planetPos = GameObject.Find ("planet").transform.position;
+		planetPos = GameObject.FindGameObjectWithTag ("Planet").transform.position;
 		planetAngle = Util.getAngleVector (transform.position, planetPos) + 270;
 		planetDistance = Vector3.Distance (planetPos, transform.position);
 		transform.eulerAngles = new Vector3 (0, 0, planetAngle);
