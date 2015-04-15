@@ -29,7 +29,7 @@ public class AlienPlanet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		planet = GameObject.FindObjectWithTag ("planet");
+		planet = GameObject.FindGameObjectWithTag ("Planet");
 		Transform[] allChildren = GetComponentsInChildren<Transform>();
 		foreach (Transform child in allChildren) {
 			if (child.name == "Center") {
