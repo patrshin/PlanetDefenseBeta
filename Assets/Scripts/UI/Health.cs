@@ -14,12 +14,7 @@ public class Health : MonoBehaviour {
 	public delegate void DamageCallback(GameObject healthObj);
 	List<DamageCallback> damageCBs = new List<DamageCallback>();
 
-
-
-	
-
-
-
+	public GameObject explosionPrefab;
 
 	public void init(float currentHealth, float maxHealth_) {
 		health = currentHealth;

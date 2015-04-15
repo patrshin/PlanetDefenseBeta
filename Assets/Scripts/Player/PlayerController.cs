@@ -474,7 +474,7 @@ public class PlayerController : MonoBehaviour {
 		fuel_bar_tmp.a = 1f;
 		if (powerType.Contains ("rocketBoost")) {
 			power_timer = 5f;
-			rocket_boost = 2f;
+			rocket_boost = 1f;
 			fuel_modifier  = 100f;
 
 			if(playerNum == 0){
