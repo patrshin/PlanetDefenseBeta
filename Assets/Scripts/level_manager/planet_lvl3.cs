@@ -15,6 +15,7 @@ public class planet_lvl3 : MonoBehaviour {
 	public bool contact_point = false;
 
 	public bool lvl3 = false;
+	public bool lvl5 = false;
 
 	Vector3 contact_pos;
 
@@ -37,6 +38,25 @@ public class planet_lvl3 : MonoBehaviour {
 
 			if (transform.position.y < 0) {
 				temp.y = -160f;
+			}
+		}
+
+		if(lvl5){
+			temp.x = transform.position.x;
+			temp.y = transform.position.y;
+			temp.z = transform.position.z;
+			
+			if (transform.position.y < -60f) {
+				temp.y = -60f;
+			}
+			else if (transform.position.y > -33f) {
+				temp.y = -33f;
+			}
+			if (transform.position.x < -48) {
+				temp.x = -48f;
+			}
+			if (transform.position.x > 48) {
+				temp.x = 48f;
 			}
 		}
 
@@ -78,10 +98,14 @@ public class planet_lvl3 : MonoBehaviour {
 		}
 
 		if (lvl3) {
-
 			if(transform.position.y > 160 || transform.position.y < -160)
 				transform.position = temp;
+		}
 
+		if (lvl5) {
+			if(transform.position.y > -20 || transform.position.y < -60 ||
+			   transform.position.x > 48 || transform.position.x < -48)
+				transform.position = temp;
 		}
 
 
