@@ -21,6 +21,13 @@ public class StarFighter : MonoBehaviour {
 	public float shootingTimeAvg;
 	private float shootingTime;
 
+	public float colorChangeCooldown;
+	private float colorChangeTimer;
+	private bool colorChanged = false;
+
+	public Color defaultColor;
+	public Color hitColor;
+
 	public float item_spawn_chance = 1f;
 	public GameObject[] item_list;
 	
@@ -36,6 +43,21 @@ public class StarFighter : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		if (colorChanged) {
+			colorChangeTimer += Time.deltaTime;
+			if (colorChangeTimer > colorChangeCooldown) {
+				Transform[] allChildren = GetComponentsInChildren<Transform>();
+				foreach (Transform child in allChildren) {
+					if (child.name == "body" || child.name == "body2" || child.name == "cockpit" || child.name == "exhaust1" ||child.name == "exhaust2") {
+						child.GetComponent<MeshRenderer>().renderer.material.color = defaultColor;
+						colorChanged = false;
+					}
+				}
+				colorChangeTimer = 0f;
+			}
+		}
+
 		relativeDistance = transform.position - planetPos;
 		planetPos = GameObject.FindGameObjectWithTag ("Planet").transform.position;
 		//If they don't reach the planet move towards it
@@ -74,6 +96,17 @@ public class StarFighter : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 		
+	}
+
+	public void damageIndicator() {
+		colorChanged = true;
+		Transform[] allChildren = GetComponentsInChildren<Transform>();
+		foreach (Transform child in allChildren) {
+			if (child.name == "body" || child.name == "body2" || child.name == "cockpit" || child.name == "exhaust1" ||child.name == "exhaust2") {
+				child.GetComponent<MeshRenderer>().renderer.material.color = hitColor;
+			}
+		}
+		//GetComponentInChildren<MeshRenderer>().renderer.material.color = hitColor;
 	}
 
 	void shootProjectile() {
