@@ -28,7 +28,7 @@ public class Tilizer : MonoBehaviour {
 
 		GameObject test = (GameObject) Instantiate (instance);
 		imageSize = test.transform.lossyScale;
-		Debug.Log (imageSize);
+		//Debug.Log (imageSize);
 		test.transform.parent = transform;	
 		tiles.Add(test);
 
