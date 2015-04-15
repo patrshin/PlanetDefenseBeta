@@ -5,6 +5,7 @@ public class ShieldedShipShield : MonoBehaviour {
 
 	public GameObject noEffect;
 	public float oscillationRate = .3f;
+	public float health;
 	GameObject shieldMesh;
 	float baseY, baseX, baseZ;
 
@@ -23,6 +24,13 @@ public class ShieldedShipShield : MonoBehaviour {
 			baseY + Random.Range (-oscillationRate, oscillationRate),
 			baseZ
 		);
+
+		if(gameObject.tag == "Boss") {
+			if (health <= 0) {
+				gameObject.transform.root.gameObject.GetComponent<boss_ship>().shield_active = false;
+				//gameObject.transform.parent.gameObject.SetActive(false);
+			}
+		}
 	}
 
 
@@ -37,6 +45,15 @@ public class ShieldedShipShield : MonoBehaviour {
 			o.transform.position = c.gameObject.transform.position;
 
 		}
+
+		if(gameObject.tag == "Boss") {
+			if (c.gameObject.tag == "Asteroid_P1" || c.gameObject.tag == "Asteroid_P2") {
+				Destroy(c.gameObject);
+				health--;
+			}
+		}
+
+
 
 	}
 }

@@ -93,7 +93,6 @@ public class Projectile : MonoBehaviour {
 			other.gameObject.GetComponent<boss_ship>().hp--;
 			Destroy (this.gameObject);
 		}
-		
 
 		for(int i = 0; i < targetTags.Length; ++i) {
 			if (other.gameObject.tag == targetTags[i]) {
