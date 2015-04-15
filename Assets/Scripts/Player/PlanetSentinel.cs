@@ -7,7 +7,7 @@ public class PlanetSentinel : MonoBehaviour {
 
 	public GameObject expPrefab;
 
-	Image hp;
+	public Image hp;
 	const int healthScale = 100;
 	int fixedHealth = healthScale;
 	MeshRenderer earthRender;
