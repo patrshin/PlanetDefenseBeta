@@ -106,6 +106,7 @@ public class railgun : MonoBehaviour {
 		if (other.gameObject.tag == "starFighter") {
 
 			other.gameObject.GetComponentInParent<StarFighter>().Health--;
+			other.gameObject.GetComponentInParent<StarFighter>().damageIndicator();
 			GameObject o = (GameObject)Instantiate (explosionPrefab);
 			o.transform.position = other.gameObject.transform.position;
 		}
