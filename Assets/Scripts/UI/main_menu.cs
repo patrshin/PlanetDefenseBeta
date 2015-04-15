@@ -5,6 +5,7 @@ using InControl;
 public class main_menu : MonoBehaviour {
 
 	public int playerNum;
+	public string Leveltarget;
 
 	// Use this for initialization
 	void Start () {
@@ -27,7 +28,7 @@ public class main_menu : MonoBehaviour {
 			if (inputDevice.Action1) 
 			{
 				Debug.Log ("Pressing A");
-				Application.LoadLevel ("Level_1");
+				Application.LoadLevel (Leveltarget);
 			}
 		}
 	}
