@@ -45,9 +45,9 @@ public class SmallComet : MonoBehaviour {
 			//targetPos = planet.transform.position;
 			//transform.LookAt (targetPos);
 		//}
-		if (this.gameObject != null) {
+		if (this.gameObject != null && flareEffect.gameObject != null) {
 			flareEffect.transform.localScale = new Vector3(baseEffectScaleX + Random.Range (-.01f, .01f),
-			                                              baseEffectScaleY + Random.Range (-.1f, .1f), 1);
+			                                               baseEffectScaleY + Random.Range (-.1f, .1f), 1);
 		}
 		transform.position += direction * speed;
 		//Debug.Log (transform.position);
