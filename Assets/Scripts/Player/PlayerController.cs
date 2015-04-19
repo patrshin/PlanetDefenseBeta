@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour {
 
 	private bool soundOff = false;
 
+
 	bool refill;
 
 	Image	p1_cd_bar;
@@ -72,6 +73,7 @@ public class PlayerController : MonoBehaviour {
 	//for sound effects
 	public AudioSource sound_basic;
 	public AudioSource sound_combined; 
+	public AudioSource bounce;
 
 	//for PowerUps
 	public float	power_timer = 0f;
@@ -118,6 +120,7 @@ public class PlayerController : MonoBehaviour {
 		var aSources = GetComponents<AudioSource>();
 		sound_basic = aSources [0];
 		sound_combined = aSources [1];
+		bounce = aSources [2];
 
 		Transform[] allChildren = GetComponentsInChildren<Transform>();
 
@@ -462,6 +465,11 @@ public class PlayerController : MonoBehaviour {
 			applyPower ("ResetPower");
 			applyPower (c.gameObject.name);
 			Destroy(c.gameObject);
+		}
+
+		if (c.gameObject.CompareTag("Asteroid_P1")) {
+			bounce.Play ();
+
 		}
 	}
 

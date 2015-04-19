@@ -27,8 +27,15 @@ public class AlienPlanet : MonoBehaviour {
 	public float item_spawn_chance = 1f;
 	public GameObject[] item_list;
 
+	MeshRenderer planetRender;
+	Material origMat;
+	Color origColor;
+	bool hurtAnimationActive = false;
+	bool deathAnimationActive = false;
+
 	// Use this for initialization
 	void Start () {
+		planetRender = GetComponent<MeshRenderer> ();
 		planet = GameObject.FindGameObjectWithTag ("Planet");
 		Transform[] allChildren = GetComponentsInChildren<Transform>();
 		foreach (Transform child in allChildren) {
@@ -89,7 +96,15 @@ public class AlienPlanet : MonoBehaviour {
 				GameObject o = (GameObject)Instantiate (item_list[spawn_item]);
 				o.transform.position = transform.position;
 			}
+			for (int i=0; i < 5; i++) {
+				GameObject exp = (GameObject)Instantiate (explosionPrefab);
+				exp.transform.position = transform.position + new Vector3 (Random.Range (-.1f, .1f), Random.Range (-.1f, .1f), -3);
+				exp.transform.localScale = exp.transform.localScale *= 3;
+			}
 			Destroy(this.gameObject);
+		}
+		if (hurtAnimationActive) {
+			planetRender.material.color = Color.Lerp(planetRender.material.color, origColor, 0.1f);
 		}
 	}
 
@@ -101,6 +116,7 @@ public class AlienPlanet : MonoBehaviour {
 				child.GetComponent<MeshRenderer>().renderer.material.color = hitColor;
 			}
 		}
+		PlanetHurt ();
 		//GetComponentInChildren<MeshRenderer>().renderer.material.color = hitColor;
 	}
 
@@ -113,6 +129,15 @@ public class AlienPlanet : MonoBehaviour {
 			     ) + 270 + angle_offset) * 
 				new Vector3(0, 350, 0);
 		//Debug.Log (o.GetComponent<projecitile>().initialSpeed);
+	}
+
+	void PlanetHurt() {
+		if (hurtAnimationActive) {
+			planetRender.material.color = origColor;
+		}
+		origColor = planetRender.material.color;
+		planetRender.material.color = Color.red;
+		hurtAnimationActive = true;
 	}
 
 }

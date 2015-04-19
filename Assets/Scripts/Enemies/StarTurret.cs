@@ -90,6 +90,7 @@ public class StarTurret : MonoBehaviour {
 
 	void Maneuvering() {
 		if (shiftTimer > timeTilShift) {
+			planetDistance = Vector3.Distance (planetPos, this.transform.position);
 			Movement();
 		}
 		else
