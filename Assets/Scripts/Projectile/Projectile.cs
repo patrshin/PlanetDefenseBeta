@@ -23,9 +23,6 @@ public class Projectile : MonoBehaviour {
 
 	}
 
-	void OnTriggerEnter(Collider c){
-		print ("HI");
-	}
 
 
 	void OnCollisionEnter(Collision other) {
