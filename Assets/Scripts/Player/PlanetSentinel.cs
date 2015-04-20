@@ -140,17 +140,22 @@ public class PlanetSentinel : MonoBehaviour {
 	bool isCameraChild = false;
 	bool destroyedManager = false;
 	Vector3 baseLocation;
+	float origZ;
 	void shakeCamera() {
 
-		/*
+
 		if (!startedShaking) {
+
 
 			// violently destroy anything taking control of the camera
 			if (GameObject.FindObjectOfType<level1_manager>()) {
-				Destroy (GameObject.FindObjectOfType<level1_manager>().gameObject); destroyedManager = true;
+				Destroy (GameObject.FindObjectOfType<level1_manager>()); destroyedManager = true;
+			}
+			if (GameObject.FindObjectOfType<level_manager>()) {
+				Destroy (GameObject.FindObjectOfType<level_manager>()); destroyedManager = true;
 			}
 			if (GameObject.FindObjectOfType<level3_camera>()) {
-				Destroy (GameObject.FindObjectOfType<level3_camera>().gameObject); destroyedManager = true;
+				Destroy (GameObject.FindObjectOfType<level3_camera>()); destroyedManager = true;
 			}
 
 
@@ -160,19 +165,25 @@ public class PlanetSentinel : MonoBehaviour {
 			isCameraChild = (GameObject.FindObjectOfType<Camera>().transform.parent != null &&
 			                 GameObject.FindObjectOfType<Camera>().transform.parent.gameObject == gameObject);
 
-			if (isCameraChild) 
+			if (isCameraChild) { 
 				baseLocation = GameObject.FindObjectOfType<Camera>().gameObject.transform.localPosition;
-			else 
+				origZ = GameObject.FindObjectOfType<Camera>().gameObject.transform.localPosition.z;
+			}else {
 				baseLocation = GameObject.FindObjectOfType<Camera>().gameObject.transform.position;
+				origZ = GameObject.FindObjectOfType<Camera>().gameObject.transform.position.z;
+			}
 			startedShaking = true;
 			Debug.Log (isCameraChild + " - is camera child");
 
-			if (destroyedManager) {
-				baseLocation = transform.position;
-				isCameraChild = false;
-			}
+
+
 		}
 
+		if (destroyedManager) {
+			baseLocation = transform.position;
+			isCameraChild = false;
+
+		}
 
 
 
@@ -180,7 +191,7 @@ public class PlanetSentinel : MonoBehaviour {
 			Random.Range (-5f / transform.lossyScale.x, 5f / transform.lossyScale.x), 
 			Random.Range (-5f / transform.lossyScale.y, 5f / transform.lossyScale.y), 0
 			);
-
+		baseLocation.z = origZ;
 
 		if (isCameraChild) {
 			GameObject.FindObjectOfType<Camera> ().gameObject.transform.localPosition = 
@@ -191,7 +202,7 @@ public class PlanetSentinel : MonoBehaviour {
 				baseLocation + additive;
 
 		}
-		*/
+
 	}
 	
 
