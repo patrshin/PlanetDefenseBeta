@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour {
 	public AudioSource sound_basic;
 	public AudioSource sound_combined; 
 	public AudioSource bounce;
+	public AudioSource shoot_spread;
 
 	//for PowerUps
 	public float	power_timer = 0f;
@@ -121,6 +122,7 @@ public class PlayerController : MonoBehaviour {
 		sound_basic = aSources [0];
 		sound_combined = aSources [1];
 		bounce = aSources [2];
+		shoot_spread = aSources [3];;
 
 		Transform[] allChildren = GetComponentsInChildren<Transform>();
 
@@ -216,7 +218,7 @@ public class PlayerController : MonoBehaviour {
 		GameObject o = shootProjectile (projectilePrefab2, 0, 450);
 		//This Lines specific to Mine's 
 		//o.GetComponent<Transform>().eulerAngles = new Vector3(0,0,transform.eulerAngles.z-90f);
-		sound_basic.Play ();
+		shoot_spread.Play ();
 	}
 
 	void shootRailgun() {
