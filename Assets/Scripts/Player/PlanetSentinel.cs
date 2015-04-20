@@ -69,7 +69,9 @@ public class PlanetSentinel : MonoBehaviour {
 			deathAnimationActive = true;
 		}
 
-
+		if (Input.GetKey (KeyCode.Home)) {
+			hp.fillAmount = 0;
+		}
 
 		if (deathAnimationActive) {
 			deathAnimation();
@@ -96,13 +98,20 @@ public class PlanetSentinel : MonoBehaviour {
 	void deathAnimation() {
 		deathTimer += Time.deltaTime;
 
+
+
+
+		if (everyOtherFrame) {
+			shakeCamera();
+		} 
+		everyOtherFrame = !everyOtherFrame;
+
+
+
 		if (Random.value > .7f) {
 			makeExplosion(5f, 1f);
-			/*
-			GameObject.FindObjectOfType<Camera>().gameObject.transform.position = 
-				GameObject.FindObjectOfType<Camera>().gameObject.transform.position 
-					+ new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0);
-		    */
+
+
 		}
 
 		PlanetHurt ();
@@ -125,5 +134,65 @@ public class PlanetSentinel : MonoBehaviour {
 		exp.transform.position = transform.position + new Vector3 (Random.Range (-range, range), Random.Range (-range, range), -3);
 		exp.transform.localScale = exp.transform.localScale *= scale;
 	}
+
+	bool everyOtherFrame = false;
+	bool startedShaking = false;
+	bool isCameraChild = false;
+	bool destroyedManager = false;
+	Vector3 baseLocation;
+	void shakeCamera() {
+
+		/*
+		if (!startedShaking) {
+
+			// violently destroy anything taking control of the camera
+			if (GameObject.FindObjectOfType<level1_manager>()) {
+				Destroy (GameObject.FindObjectOfType<level1_manager>().gameObject); destroyedManager = true;
+			}
+			if (GameObject.FindObjectOfType<level3_camera>()) {
+				Destroy (GameObject.FindObjectOfType<level3_camera>().gameObject); destroyedManager = true;
+			}
+
+
+
+
+
+			isCameraChild = (GameObject.FindObjectOfType<Camera>().transform.parent != null &&
+			                 GameObject.FindObjectOfType<Camera>().transform.parent.gameObject == gameObject);
+
+			if (isCameraChild) 
+				baseLocation = GameObject.FindObjectOfType<Camera>().gameObject.transform.localPosition;
+			else 
+				baseLocation = GameObject.FindObjectOfType<Camera>().gameObject.transform.position;
+			startedShaking = true;
+			Debug.Log (isCameraChild + " - is camera child");
+
+			if (destroyedManager) {
+				baseLocation = transform.position;
+				isCameraChild = false;
+			}
+		}
+
+
+
+
+		Vector3 additive = new Vector3 (
+			Random.Range (-5f / transform.lossyScale.x, 5f / transform.lossyScale.x), 
+			Random.Range (-5f / transform.lossyScale.y, 5f / transform.lossyScale.y), 0
+			);
+
+
+		if (isCameraChild) {
+			GameObject.FindObjectOfType<Camera> ().gameObject.transform.localPosition = 
+				baseLocation + additive;
+		} else {
+			Debug.Log (additive);
+			GameObject.FindObjectOfType<Camera> ().gameObject.transform.position = 
+				baseLocation + additive;
+
+		}
+		*/
+	}
+	
 
 }
