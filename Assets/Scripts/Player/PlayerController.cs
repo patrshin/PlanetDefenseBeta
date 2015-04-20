@@ -131,6 +131,7 @@ public class PlayerController : MonoBehaviour {
 				child.GetComponent<ParticleSystem>().enableEmission = false;
 			}
 		}
+		stopBoosting ();
 
 		speed = InitSpeed;
 
@@ -381,6 +382,7 @@ public class PlayerController : MonoBehaviour {
 						child.GetComponent<ParticleSystem>().enableEmission = true;
 					}
 				}
+				startBoosting();
 			}
 			else {
 				Transform[] allChildren = GetComponentsInChildren<Transform>();
@@ -391,6 +393,7 @@ public class PlayerController : MonoBehaviour {
 						child.GetComponent<ParticleSystem>().enableEmission = false;
 					}
 				}
+				stopBoosting();
 
 			}
 		}
@@ -405,7 +408,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			refill = true;
-
+			stopBoosting();
 			if(playerNum == 0){
 				p1_fuel_bar.fillAmount += Time.deltaTime / fuel_auto_fill_rate;
 			}
@@ -560,6 +563,30 @@ public class PlayerController : MonoBehaviour {
 				: 1f;
 	}
 
+	
+	void startBoosting(){
+		string name = "p" + (playerNum+1) + "_fuel_expend";
+		GameObject id = GameObject.Find (name);
+		if (id == null)
+			return;
+		
+		if (id.GetComponent<FuelIndication> ()) {
+			id.GetComponent<FuelIndication> ().startBoosting();
+		}
+	}
+	
+	void stopBoosting(){
+		string name = "p" + (playerNum+1) + "_fuel_expend";
+		GameObject id = GameObject.Find (name);
+		if (id == null) {
+			Debug.Log ("Failed to find GameObject:" + name);
+			return;
+		}
+
+		if (id.GetComponent<FuelIndication> ()) {
+			id.GetComponent<FuelIndication> ().stopBoosting();
+		}
+	}
 
 
 }
