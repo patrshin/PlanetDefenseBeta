@@ -36,6 +36,7 @@ public class intro_asteroid : MonoBehaviour {
 
 		if(finished) {
 			load_time += Time.deltaTime;
+			//player.GetComponent<intro_player>().signal = true;
 		}
 
 		if(load_time > 3) {

@@ -44,9 +44,16 @@ public class intro_player : MonoBehaviour {
 				}
 			}
 
-			if(done) {
+			if(done && !signal) {
 				if(transform.rotation.eulerAngles.z < 45f) {
 					transform.RotateAround(Vector3.zero, Vector3.forward, angle_speed * Time.deltaTime);
+				}
+			}
+
+			if(signal) {
+				if(!(transform.rotation.eulerAngles.z < 360 && transform.rotation.eulerAngles.z > 359.5)) {
+					if(transform.rotation.eulerAngles.z > 0)
+						transform.RotateAround(Vector3.zero, -Vector3.forward, angle_speed * Time.deltaTime);
 				}
 			}
 		}

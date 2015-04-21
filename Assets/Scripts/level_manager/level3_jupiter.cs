@@ -18,11 +18,11 @@ public class level3_jupiter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if (transform.position.x >= 875) {
+		if (transform.position.x >= 874) {
 			comment_1.enabled = true;
 		}
 
-		if (transform.position.x >= 895) {
+		if (transform.position.x >= 893) {
 			manager.scene_playing = false;
 			Destroy(gameObject);
 		}

@@ -81,6 +81,7 @@ public class intro_ast_physics : MonoBehaviour {
 			rigidbody.velocity = bounceFactor*dir;
 			//rigidbody.AddRelativeForce(2f*dir,ForceMode.VelocityChange);
 			bounceDelay = bounce_delay;
+			c.gameObject.GetComponent<intro_player>().signal = true;
 		}
 
 		else if(c.gameObject.CompareTag ("Planet")) {
