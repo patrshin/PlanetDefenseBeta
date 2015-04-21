@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour {
 				child.GetComponent<ParticleSystem>().enableEmission = false;
 			}
 		}
-		stopBoosting ();
+		//stopBoosting ();
 
 		speed = InitSpeed;
 

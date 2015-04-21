@@ -130,7 +130,7 @@ public class planet_lvl3 : MonoBehaviour {
 		}
 
 		if (c.tag == "end_lvl3") {
-			Application.LoadLevel("level_4_Real");
+			Application.LoadLevel("level_4_Intro");
 		}
 		
 	}
