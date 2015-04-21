@@ -19,7 +19,7 @@ public class intro_asteroid : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(transform.position.y < 40 && transform.position.y > -40) {
+		if(transform.position.y < 38 && transform.position.y > -40) {
 			if(!done){
 				OMG.enabled = true;
 				done = true;
@@ -29,7 +29,7 @@ public class intro_asteroid : MonoBehaviour {
 			}
 		}
 
-		if(transform.position.y > 40 && done) {
+		if(transform.position.y > 38 && done) {
 			MOAR.enabled = true;
 			finished = true;
 		}
