@@ -131,17 +131,13 @@ public class PlayerController : MonoBehaviour {
 				child.GetComponent<ParticleSystem>().enableEmission = false;
 			}
 		}
-		//stopBoosting ();
+		stopBoosting ();
 
 		speed = InitSpeed;
 
 		refill = true;
 
 
-	}
-
-	void Awake() {
-		stopBoosting ();
 	}
 		
 	// Update is called once per frame
