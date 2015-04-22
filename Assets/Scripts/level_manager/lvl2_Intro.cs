@@ -26,10 +26,9 @@ public class lvl2_Intro : MonoBehaviour {
 
 	void OnTriggerEnter(Collider c) {		
 		if (c.gameObject.CompareTag ("sun")) {
-			explosion.GetComponent<level2_script>().expansion_rate = 2;
+			explosion.GetComponent<level2_script>().expansion_rate = 1.5f;
 			explosion.GetComponent<lvl2_Intro>().hit = true;
-			Destroy(gameObject);
-
+			GetComponentInChildren<ParticleSystem> ().enableEmission = false;
 		}
 	}
 }
