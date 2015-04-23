@@ -23,6 +23,10 @@ public class planet_lvl3 : MonoBehaviour {
 
 	Vector3 temp;
 
+	public bool endLevel3 = false;
+	private float Level3Endtimer = 0f;
+	private float Level3EndDuration = 3f;
+
 	void Start() {
 		GameObject hp_obj = GameObject.Find ("HP");
 		hp_bar = hp_obj.GetComponent<Image> ();
@@ -30,6 +34,24 @@ public class planet_lvl3 : MonoBehaviour {
 	}
 
 	void Update() {
+
+		if (endLevel3) {		
+			if (Level3EndDuration < Level3Endtimer) {
+				Application.LoadLevel("level_4_Intro");
+			}
+			else {
+				/*if (Level3EndDuration/2 < Level3Endtimer) {
+					Transform[] allChildren = GetComponentsInChildren<Transform>();
+					foreach (Transform child in allChildren) {
+						if (child.name == "Main Camera") {
+							child.parent = null;
+						}
+					}	
+				}*/
+				transform.position = transform.position + Vector3.right*50;
+				Level3Endtimer += Time.deltaTime;
+			}
+		}
 
 		if(lvl3){
 			temp.x = transform.position.x;
@@ -130,7 +152,7 @@ public class planet_lvl3 : MonoBehaviour {
 		}
 
 		if (c.tag == "end_lvl3") {
-			Application.LoadLevel("level_4_Intro");
+			endLevel3 = true;
 		}
 		
 	}
