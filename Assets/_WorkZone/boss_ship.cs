@@ -26,6 +26,7 @@ public class boss_ship : MonoBehaviour {
 	public GameObject[] ast_spwners;
 	public GameObject ship_spwners;
 	public GameObject explosionParty;
+	public GameObject flashOut;
 
 	bool shieldset = false;
 
@@ -41,10 +42,29 @@ public class boss_ship : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if(hp <= 0){
+			// Disable EVERYTHING
+			for(int i = 0; i < transform.childCount; ++i) {
+				transform.GetChild(i).gameObject.SetActive(false);
+			}
+			for(int i = 0; i < ast_spwners.Length; i++) {
+				ast_spwners[i].SetActive(false);
+
+			}
+			ship_spwners.SetActive(false);
+			shield.SetActive(false);
+
+
 
 			DeathAnimation();
 			return;
 		}
+
+
+
+
+
+
+
 		if (hp <= (start_hp/2)){
 			for(int i = 0; i < ast_spwners.Length; i++) {
 				ast_spwners[i].SetActive(true);
@@ -108,26 +128,43 @@ public class boss_ship : MonoBehaviour {
 
 	bool startedDeathAnimation = false;
 	enum DeathPhase {
+		CameraPan,
 		FirstFlash,
 		SecondShaking,
 		ExplosionPhase,
 		End
 	};
-	DeathPhase phase = DeathPhase.FirstFlash;
+	DeathPhase phase = DeathPhase.CameraPan;
 	float deathTime = 0f;
 	Vector3 origPos;
 	void DeathAnimation() {
-		deathTime = 0f;
+		deathTime += Time.deltaTime;
 
 		switch (phase) {
+		case DeathPhase.CameraPan:
+			Vector3 temp = Vector3.Lerp(Camera.main.transform.position, transform.position, 1f*Time.deltaTime);
+			temp.z = Camera.main.transform.position.z;
+			Camera.main.transform.position = temp;
+			if (deathTime > 1.5) {
+				phase = DeathPhase.FirstFlash;
+			}
+			break;
 		case DeathPhase.FirstFlash:
 			origPos = transform.position;
-			//createFlash;
+			GameObject o = (GameObject) Instantiate (flashOut);
+			o.GetComponent<FadeToWhite>().fadeOutRate = .4f;
+
+			GameObject expFirst = (GameObject) Instantiate(explosionParty);
+			expFirst.transform.position = transform.position;
+			expFirst.GetComponent<ExplosionParty>().duration = 2f;
+			expFirst.GetComponent<ExplosionParty>().range = 2f;
+			expFirst.GetComponent<ExplosionParty>().frequency = .1f;
 			phase = DeathPhase.SecondShaking;
+
 			break;
 
 		case DeathPhase.SecondShaking:
-			transform.position = origPos + new Vector3(Random.Range(-2, 2), 0, 0);
+			transform.position = origPos + new Vector3(Random.Range(-1, 1), 0, 0);
 			if (deathTime > 4f) {
 				deathTime = 0f;
 				phase = DeathPhase.ExplosionPhase;
@@ -135,11 +172,28 @@ public class boss_ship : MonoBehaviour {
 			break;
 		case DeathPhase.ExplosionPhase:
 			//createExplosion thing
+			GameObject exp = (GameObject) Instantiate(explosionParty);
+			exp.transform.position = transform.position;
+			exp.GetComponent<ExplosionParty>().duration = 10f;
+			exp.GetComponent<ExplosionParty>().range = 10f;
+
+			exp = (GameObject) Instantiate(explosionParty);
+			exp.transform.position = transform.position;
+			exp.GetComponent<ExplosionParty>().duration = 10f;
+			exp.GetComponent<ExplosionParty>().range = 15f;
+
 			phase = DeathPhase.End;
 			break;
 
 		case DeathPhase.End:
-			// fade to white.
+			transform.position = origPos + new Vector3(Random.Range(-2, 2), 0, 0);
+			GameObject fade = (GameObject) Instantiate (flashOut);
+			fade.GetComponent<FadeToWhite>().inverse = true;
+			fade.GetComponent<FadeToWhite>().fadeOutRate = .007f;
+
+
+			if (deathTime > 6f)
+				Application.LoadLevel("Credits");
 			break;
 		}
 
