@@ -25,7 +25,7 @@ public class ShieldedShipShield : MonoBehaviour {
 			baseZ
 		);
 
-		if(gameObject.tag == "Boss") {
+		if(gameObject.tag == "shield") {
 			if (health <= 0) {
 				gameObject.transform.root.gameObject.GetComponent<boss_ship>().shield_active = false;
 				//gameObject.transform.parent.gameObject.SetActive(false);
@@ -46,7 +46,7 @@ public class ShieldedShipShield : MonoBehaviour {
 
 		}
 
-		if(gameObject.tag == "Boss") {
+		if(gameObject.tag == "shield") {
 			if (c.gameObject.tag == "Asteroid_P1" || c.gameObject.tag == "Asteroid_P2") {
 				Destroy(c.gameObject);
 				health--;
