@@ -65,5 +65,9 @@ public class SmallComet : MonoBehaviour {
 			Destroy(gameObject);
 
 		}
+		if (c.gameObject.tag == "Player") {
+			c.transform.position = transform.position;
+			Destroy (this.gameObject);
+		}
 	}
 }
