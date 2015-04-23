@@ -25,8 +25,10 @@ public class boss_ship : MonoBehaviour {
 
 	public GameObject[] ast_spwners;
 	public GameObject ship_spwners;
+	public GameObject explosionParty;
 
 	bool shieldset = false;
+
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +40,11 @@ public class boss_ship : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if(hp <= 0){
 
+			DeathAnimation();
+			return;
+		}
 		if (hp <= (start_hp/2)){
 			for(int i = 0; i < ast_spwners.Length; i++) {
 				ast_spwners[i].SetActive(true);
@@ -96,12 +102,48 @@ public class boss_ship : MonoBehaviour {
 			fire = false;
 		}
 
-		if(hp <= 0){
-			Application.LoadLevel("Congrats");
-		}
+
 	
 	}
 
+	bool startedDeathAnimation = false;
+	enum DeathPhase {
+		FirstFlash,
+		SecondShaking,
+		ExplosionPhase,
+		End
+	};
+	DeathPhase phase = DeathPhase.FirstFlash;
+	float deathTime = 0f;
+	Vector3 origPos;
+	void DeathAnimation() {
+		deathTime = 0f;
+
+		switch (phase) {
+		case DeathPhase.FirstFlash:
+			origPos = transform.position;
+			//createFlash;
+			phase = DeathPhase.SecondShaking;
+			break;
+
+		case DeathPhase.SecondShaking:
+			transform.position = origPos + new Vector3(Random.Range(-2, 2), 0, 0);
+			if (deathTime > 4f) {
+				deathTime = 0f;
+				phase = DeathPhase.ExplosionPhase;
+			}
+			break;
+		case DeathPhase.ExplosionPhase:
+			//createExplosion thing
+			phase = DeathPhase.End;
+			break;
+
+		case DeathPhase.End:
+			// fade to white.
+			break;
+		}
+
+	}
 
 
 }
