@@ -37,7 +37,7 @@ public class StarFighter : MonoBehaviour {
 		planetAngle = Util.getAngleVector (transform.position, planetPos) + 270;
 		planetDistance = Vector3.Distance (planetPos, transform.position);
 		transform.eulerAngles = new Vector3 (0, 0, planetAngle);
-		Debug.Log (planetAngle);
+//		Debug.Log (planetAngle);
 		shootingTime = Random.Range (shootingTimeAvg - 0.5f, shootingTimeAvg + 0.5f);
 	}
 	
