@@ -24,6 +24,13 @@ public class enemy_mine : MonoBehaviour {
 
 	[HideInInspector]
 	public bool hit = false;
+	public bool detected = false;
+
+	public GameObject Planet;
+	public float minDistance;
+	public float curDistance;
+
+	private Color normalLight;
 	
 	// Use this for initialization
 	void Start () {
@@ -31,28 +38,52 @@ public class enemy_mine : MonoBehaviour {
 			Debug.LogError("Tag / Damage count mismatch");
 		//GetComponent<Rigidbody>().AddForce(initialSpeed);
 		hp = GameObject.Find ("HP").GetComponent<Image>();
+		Planet = GameObject.FindGameObjectWithTag ("Planet");
+		normalLight = GetComponent<Light> ().color;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (flyTimer > flyTime) {
-			GetComponent<Light>().enabled = true;
-			transform.DetachChildren();
 
-			//rigidbody.velocity = rigidbody.velocity*0.5f;
+		Transform[] allChildren = GetComponentsInChildren<Transform>();
+		foreach (Transform child in allChildren) {
+			if (child.name == "Detector") {
+				child.GetComponent<Transform>().RotateAround(this.transform.position, Vector3.forward, Time.deltaTime * 50f);
+			}
+		}
 
-			
+		if (detected) {	
+			curDistance = Vector3.Distance (Planet.transform.position, transform.position);
+			GetComponent<AudioSource>().Play();
+			GetComponent<Light>().color = Color.red;
+			transform.position = Vector3.MoveTowards(transform.position,Planet.transform.position,Time.deltaTime*4);
+			if (curDistance > 100) {
+				GetComponent<Light>().color = normalLight;
+				detected = false;
+			}
 			if (GetComponent<Light>().intensity < 4) {
 				GetComponent<Light>().intensity += Time.deltaTime*4;
 			}
-			
-			
-			
-			
 		}
-		else{
-			flyTimer += Time.deltaTime;
-			transform.position += Vector3.left * Time.deltaTime * speed;
+		else {
+			if (flyTimer > flyTime) {
+				curDistance = Vector3.Distance (Planet.transform.position, transform.position);
+				GetComponent<Light>().enabled = true;
+				//rigidbody.velocity = rigidbody.velocity*0.5f;
+
+				if (GetComponent<Light>().intensity < 4) {
+					GetComponent<Light>().intensity += Time.deltaTime*4;
+				}
+				if (curDistance < minDistance) {
+					detected = true;
+				}
+				
+				
+			}
+			else{
+				flyTimer += Time.deltaTime;
+				transform.position += Vector3.left * Time.deltaTime * speed;
+			}
 		}
 
 		if(hit){
@@ -97,6 +128,11 @@ public class enemy_mine : MonoBehaviour {
 			GameObject o = (GameObject)Instantiate (explosionPrefab);
 			o.transform.position = transform.position;
 			hp.fillAmount -= 0.15f;
+			Destroy (this.gameObject);
+		}
+		if (other.gameObject.tag == "Player" || other.gameObject.tag == "Asteroid_P1" || other.gameObject.tag == "Asteroid_P2" || other.gameObject.tag == "CrackedAsteroid") {
+			GameObject o = (GameObject)Instantiate (explosionPrefab);
+			o.transform.position = transform.position;
 			Destroy (this.gameObject);
 		}
 	}
