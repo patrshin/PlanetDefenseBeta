@@ -34,8 +34,8 @@ public class ShieldedShip : MonoBehaviour {
 	GameObject planetRef;
 	GameObject shipParent;
 	List<WeakReference> children = new List<WeakReference>();
-
-
+	
+	Quaternion modifiedRotation;
 	// Use this for initialization
 	void Start () {
 		health = GetComponent<Health> ();
@@ -47,6 +47,7 @@ public class ShieldedShip : MonoBehaviour {
 
 		shipParent.transform.rotation = 
 			Quaternion.Euler(0, 0, Util.getAngleVector(planetRef.transform.position, shipParent.transform.position) - 90); 
+
 	}
 	
 	// Update is called once per frame
@@ -127,17 +128,23 @@ public class ShieldedShip : MonoBehaviour {
 		}
 	}
 
+	float customMod(float a, float n) {
+		return a - ((int)(a/n)) * n;
+	}
+
 	void updateRotation() {
+		/*
 		float properRotation = Util.getAngleVector(transform.position, planetRef.transform.position);
+		Debug.Log ("Rotation: " + properRotation);
+
 		float thisRotation = shipParent.transform.eulerAngles.z -90;
 	
+
 		properRotation = properRotation - thisRotation;
+		properRotation = customMod((properRotation + 180), 360f) - 180f;
 
 
-		properRotation = (properRotation + 180) % 360 - 180;
-
-
-
+		Debug.Log ("Rotation: " + properRotation);
 
 
 
@@ -146,7 +153,43 @@ public class ShieldedShip : MonoBehaviour {
 		} else {
 			shipParent.transform.rotation = Quaternion.Euler(0, 0, thisRotation - rotationalRate + 90);
 		}
-	}
+		*/
+
+		Vector3 ThumbPos = planetRef.transform.position - shipParent.transform.position;
+		Vector3 playerPos = Quaternion.Euler(new Vector3(0, 0, shipParent.transform.eulerAngles.z-90)) * new Vector3(1, 0, 0);
+		
+		var angle = Vector3.Angle (playerPos, ThumbPos);
+		var cross = Vector3.Cross (playerPos, ThumbPos);
+		if (cross.z < 0) 
+			angle = -angle;
+		if (Mathf.Abs (angle) > 2) {
+			if (angle >= 0) {
+				shipParent.transform.Rotate(Vector3.forward, rotationalRate  * Time.deltaTime);
+			}
+			else if (angle < 0){
+				shipParent.transform.Rotate(Vector3.forward, -rotationalRate * Time.deltaTime);
+			}
+		}
+
+		/*
+		Quaternion rot = Quaternion.LookRotation (planetRef.transform.position - shipParent.transform.position);
+		Debug.Log (rot.eulerAngles);
+		rot = Quaternion.Euler (new Vector3 (rot.eulerAngles.x, rot.eulerAngles.y, (rot.eulerAngles.z + 90)));
+
+		float str = Mathf.Min (10 * Time.deltaTime, 1);
+
+		rot = Quaternion.Lerp (transform.rotation, rot, str);
+		rot.eulerAngles = new Vector3 (0, 0, rot.eulerAngles.z);
+		modifiedRotation = rot;
+
+
+
+
+		// Modified rotation is only the calculated value
+		//shipParent.transform.rotation = Quaternion.Euler (new Vector3 (0, 0, modifiedRotation.eulerAngles.z + 20));
+		shipParent.transform.rotation = modifiedRotation;
+		*/
+	}	
 
 
 	
