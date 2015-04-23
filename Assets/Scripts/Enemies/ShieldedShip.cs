@@ -203,7 +203,6 @@ public class ShieldedShip : MonoBehaviour {
 	}
 
 	void SpawnShips() {
-		Debug.Log (turret.tag);
 	
 		if (children.Count > numMaxShips)
 						return;

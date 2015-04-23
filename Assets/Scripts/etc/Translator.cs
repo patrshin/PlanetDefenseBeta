@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Translator : MonoBehaviour {
 
+	public Vector3 translationAmount = new Vector3(.1f, 0, 0);
 	// Use this for initialization
 	void Start () {
 	
@@ -10,6 +11,6 @@ public class Translator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		transform.Translate (new Vector3 (.1f, 0f, 0f));
+		transform.Translate (translationAmount);
 	}
 }
