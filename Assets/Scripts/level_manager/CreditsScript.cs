@@ -3,7 +3,44 @@ using System.Collections;
 
 public class CreditsScript : MonoBehaviour {
 
-	public string[] CreditText;
+	string[] CreditText = {
+		"Congratulations.",
+		"",
+		"",
+		"",
+		"",
+		"Thanks to the both of you,",
+		"The Earth and its inhabitants",
+		"have found a new place",
+		"to call home.",
+		"",
+		"",
+		"Thank you pilots;",
+		"the world is in your debt.",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"STAFF",
+		"",
+		"",
+		"",
+		"John Lee",
+		"Johnathan Corkery",
+		"Patrick Shin",
+		"Zachary Nowicki",
+		"",
+		"",
+		"",
+		"",
+		"",
+		
+
+
+	};
 	TextMesh text;
 
 	// Use this for initialization
