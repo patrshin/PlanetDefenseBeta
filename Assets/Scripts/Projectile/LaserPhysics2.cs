@@ -84,20 +84,24 @@ public class LaserPhysics2 : MonoBehaviour {
 			for(int i = 0; i<sphereHits.Length; i++)
 			{
 				if(playerNum == 0){
-					if (!sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
-						sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
-						sphereHits[i].transform.gameObject.GetComponent<Health>().takeDamage(25);
-						GameObject o = (GameObject)Instantiate (sphereHits[i].transform.gameObject.GetComponent<Health>().explosionPrefab);
-						o.transform.position = sphereHits[i].transform.gameObject.transform.position;
+					if(sphereHits[i].transform.tag != "Boss") {
+						if (!sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+							sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+							sphereHits[i].transform.gameObject.GetComponent<Health>().takeDamage(25);
+							GameObject o = (GameObject)Instantiate (sphereHits[i].transform.gameObject.GetComponent<Health>().explosionPrefab);
+							o.transform.position = sphereHits[i].transform.gameObject.transform.position;
+						}
 					}
 				}
 					
 				if(playerNum == 1){
-					if (!sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
-						sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
-						sphereHits[i].transform.gameObject.GetComponent<Health>().takeDamage(25);
-						GameObject o = (GameObject)Instantiate (sphereHits[i].transform.gameObject.GetComponent<Health>().explosionPrefab);
-						o.transform.position = sphereHits[i].transform.gameObject.transform.position;
+					if(sphereHits[i].transform.tag != "Boss") {
+						if (!sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+							sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+							sphereHits[i].transform.gameObject.GetComponent<Health>().takeDamage(25);
+							GameObject o = (GameObject)Instantiate (sphereHits[i].transform.gameObject.GetComponent<Health>().explosionPrefab);
+							o.transform.position = sphereHits[i].transform.gameObject.transform.position;
+						}
 					}
 				}
 			}
