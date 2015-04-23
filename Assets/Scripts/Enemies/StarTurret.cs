@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class StarTurret : MonoBehaviour {
@@ -33,9 +34,18 @@ public class StarTurret : MonoBehaviour {
 	private float shootTime;
 	public float minShootTime;
 	public float maxShootTime;
+
+	Image hp;
+
+	public float timeActive;
+	private float activeTimer = 0;
+
+	public GameObject mines;
 	
 	// Use this for initialization
 	void Start () {
+		hp = GameObject.Find ("HP").GetComponent<Image>();
+
 		shootTime = Random.Range (minShootTime, maxShootTime);
 		planetPos = GameObject.FindGameObjectWithTag ("Planet").transform.position;
 		planetAngle = Util.getAngleVector (transform.position, planetPos) + 270;
@@ -55,45 +65,66 @@ public class StarTurret : MonoBehaviour {
 	void Update () {
 		planetPos = GameObject.FindGameObjectWithTag ("Planet").transform.position;
 		relativeDistance = transform.position - planetPos;
-
 		//If they don't reach the planet move towards it
 	}
 	
 	void LateUpdate () {
 		shootTime -= Time.deltaTime;
-		if (planetDistance > 20) {
-			transform.position = Vector3.MoveTowards(transform.position,planetPos,Time.deltaTime*speedMoving);
-			planetAngle = Util.getAngleVector (transform.position, planetPos) + 270;
-			transform.eulerAngles = new Vector3 (0, 0, planetAngle);
-			planetDistance = Vector3.Distance (planetPos, this.transform.position);
+		if (activeTimer > timeActive) {
+			GameObject o = (GameObject) Instantiate (mines);
+			o.GetComponent<enemy_mine>().speed = 0;
+			Vector3 mine_pos = transform.position;
+			o.transform.position = mine_pos;
+			Destroy(this.gameObject);
+			return;
+			//transform.position = Vector3.MoveTowards(transform.position,transform.position-planetPos,Time.deltaTime*speedMoving);
+			//planetAngle = Util.getAngleVector (transform.position, planetPos) + 90;
+			//transform.eulerAngles = new Vector3 (0, 0, planetAngle);
 		}
 		else {
-			transform.position = planetPos + relativeDistance;
-			relativeDistance = transform.position - planetPos;
-			planetAngle = Util.getAngleVector (transform.position, planetPos) + 270f ;
-			transform.eulerAngles = new Vector3 (0, 0, planetAngle);
-			Maneuvering();
-		}
-		if (Health < 1) {
-			int spawn_item = Mathf.RoundToInt(Random.value * (item_list.Length - 1));
-			float spawn_chance = Random.value;
-			if(spawn_chance <= item_spawn_chance){
-				GameObject o = (GameObject)Instantiate (item_list[spawn_item]);
-				o.transform.position = transform.position;
+			activeTimer += Time.deltaTime;
+			Debug.Log (activeTimer);
+
+			//if planet is far away move towards it
+			if (planetDistance > 20) {
+				transform.position = Vector3.MoveTowards(transform.position,planetPos,Time.deltaTime*speedMoving);
+				planetAngle = Util.getAngleVector (transform.position, planetPos) + 270;
+				transform.eulerAngles = new Vector3 (0, 0, planetAngle);
+				planetDistance = Vector3.Distance (planetPos, this.transform.position);
+
 			}
-			if (GameObject.Find("StarFighterSpawnerPrefab"))
-				GameObject.Find("StarFighterSpawnerPrefab").GetComponent<StarFighterSpawner>().childCount--;
-			Destroy(this.gameObject);
+			else {
+				transform.position = planetPos + relativeDistance;
+				if (planetDistance < 15) {
+					transform.position = Vector3.MoveTowards(transform.position,transform.position-planetPos,Time.deltaTime*speedMoving);
+				}
+				relativeDistance = transform.position - planetPos;
+				planetAngle = Util.getAngleVector (transform.position, planetPos) + 270f ;
+				transform.eulerAngles = new Vector3 (0, 0, planetAngle);
+				Maneuvering();
+			}
+			if (Health < 1) {
+				int spawn_item = Mathf.RoundToInt(Random.value * (item_list.Length - 1));
+				float spawn_chance = Random.value;
+				if(spawn_chance <= item_spawn_chance){
+					GameObject o = (GameObject)Instantiate (item_list[spawn_item]);
+					o.transform.position = transform.position;
+				}
+				if (GameObject.Find("StarFighterSpawnerPrefab"))
+					GameObject.Find("StarFighterSpawnerPrefab").GetComponent<StarFighterSpawner>().childCount--;
+				Destroy(this.gameObject);
+			}
 		}
 		
 	}
 
 	void Maneuvering() {
 		if (shiftTimer > timeTilShift) {
+			//everytime you shit recalculate distance
 			planetDistance = Vector3.Distance (planetPos, this.transform.position);
 			Movement();
 		}
-		else
+		else 
 			shiftTimer += Time.deltaTime;
 
 	}
@@ -133,4 +164,20 @@ public class StarTurret : MonoBehaviour {
 				new Vector3(0, 500, 0);
 		//Debug.Log (o.GetComponent<projecitile>().initialSpeed);
 	}
+
+	void OnCollisionEnter(Collision other){
+		if (other.gameObject.tag == "Planet") {
+			GameObject o = (GameObject)Instantiate (explosionPrefab);
+			o.transform.position = transform.position;
+			hp.fillAmount -= 0.15f;
+			Destroy (this.gameObject);
+		}
+		if (other.gameObject.tag == "Player") {
+			GameObject o = (GameObject)Instantiate (explosionPrefab);
+			o.transform.position = transform.position;
+			Destroy (this.gameObject);
+		}
+		
+	}
+
 }
