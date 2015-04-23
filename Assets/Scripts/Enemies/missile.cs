@@ -32,9 +32,17 @@ public class missile : MonoBehaviour {
 		planet_pos.x = Planet.transform.position.x + offset;
 		planet_pos.y = Planet.transform.position.y;
 		planet_pos.z = Planet.transform.position.z;
-		
+
+
+
+
 		float step = speed * Time.deltaTime;
 		transform.position = Vector3.MoveTowards(transform.position, planet_pos, step);
+
+		transform.rotation = Quaternion.Euler(new Vector3 (
+			transform.rotation.x,
+			transform.rotation.y,
+			Util.getAngleVector (transform.position, planet_pos) - 225));	
 	}
 
 	void OnCollisionEnter(Collision other) {
