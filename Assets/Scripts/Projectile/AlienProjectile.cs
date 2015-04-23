@@ -40,7 +40,7 @@ public class AlienProjectile : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 		if (other.gameObject.tag == "Planet") {
-			Debug.Log("Planet");
+//			Debug.Log("Planet");
 			GameObject o = (GameObject)Instantiate (explosionPrefab);
 			o.transform.position = transform.position;
 			hp_bar.fillAmount -= 0.05f;

@@ -173,7 +173,7 @@ public class PlanetSentinel : MonoBehaviour {
 				origZ = GameObject.FindObjectOfType<Camera>().gameObject.transform.position.z;
 			}
 			startedShaking = true;
-			Debug.Log (isCameraChild + " - is camera child");
+//			Debug.Log (isCameraChild + " - is camera child");
 
 
 

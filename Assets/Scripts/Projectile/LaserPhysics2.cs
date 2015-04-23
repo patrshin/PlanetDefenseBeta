@@ -38,7 +38,7 @@ public class LaserPhysics2 : MonoBehaviour {
 		
 		angle = Mathf.Atan2 (deltaY, deltaX);
 		
-		Debug.Log ("Angle: " + angle * Mathf.Rad2Deg);
+//		Debug.Log ("Angle: " + angle * Mathf.Rad2Deg);
 		//player = GameObject.Find ("playerPrefab_1");
 
 		x = transform.position.x;

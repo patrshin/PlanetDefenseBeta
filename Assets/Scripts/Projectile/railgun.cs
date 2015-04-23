@@ -18,7 +18,7 @@ public class railgun : MonoBehaviour {
 			temp.y = 2f;
 			transform.localScale = temp;
 		}
-		Debug.Log (angle);
+//		Debug.Log (angle);
 	}
 
 	void FixedUpdate () {
