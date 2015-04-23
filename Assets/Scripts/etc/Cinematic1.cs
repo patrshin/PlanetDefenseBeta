@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Cinematic1 : MonoBehaviour {
-
+	/*
 	enum Phase {
 		FirstZoom,
 		DangerPan,
@@ -91,4 +91,5 @@ public class Cinematic1 : MonoBehaviour {
 			break;
 		}
 	}
+	*/
 }
