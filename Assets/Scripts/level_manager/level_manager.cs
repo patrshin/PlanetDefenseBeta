@@ -16,6 +16,8 @@ public class level_manager : MonoBehaviour {
 	public float load_level_cd;
 	public float load_level_delay = 3f;
 
+	public GameObject UI;
+
 
 
 
@@ -24,6 +26,7 @@ public class level_manager : MonoBehaviour {
 	void Start () {
 		//level1_boss_pos.z = -10;
 		//level1_boss_pos.x = boss_x;
+		//UI = GameObject.Find ("Player_UI_Overlay");
 	}
 	
 	// Update is called once per frame
@@ -43,6 +46,7 @@ public class level_manager : MonoBehaviour {
 			transform.position = Vector3.MoveTowards(transform.position, level1_boss_pos, step);
 			commandEnemies("Asteroid_P1","Freeze");
 			commandEnemies("Asteroid_P2","Freeze");
+			UI.SetActive(false);
 		}
 
 		if(level1_scene_done){
@@ -53,9 +57,11 @@ public class level_manager : MonoBehaviour {
 			transform.position = Vector3.MoveTowards(transform.position, planet_pos, step);
 			if(transform.position.x == Planet.transform.position.x && transform.position.y == Planet.transform.position.y){
 				//level1_scene_done = false;
+				UI.SetActive(true);
 			}
 			commandEnemies("Asteroid_P1","unFreeze");
 			commandEnemies("Asteroid_P2","unFreeze");
+
 		}
 
 		if(level2_scene_done) {

@@ -579,7 +579,7 @@ public class PlayerController : MonoBehaviour {
 		string name = "p" + (playerNum+1) + "_fuel_expend";
 		GameObject id = GameObject.Find (name);
 		if (id == null) {
-			Debug.Log ("Failed to find GameObject:" + name);
+			//Debug.Log ("Failed to find GameObject:" + name);
 			return;
 		}
 
