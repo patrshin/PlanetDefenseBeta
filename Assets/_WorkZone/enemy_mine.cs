@@ -54,9 +54,8 @@ public class enemy_mine : MonoBehaviour {
 
 		if (detected) {	
 			curDistance = Vector3.Distance (Planet.transform.position, transform.position);
-			GetComponent<AudioSource>().Play();
 			GetComponent<Light>().color = Color.red;
-			transform.position = Vector3.MoveTowards(transform.position,Planet.transform.position,Time.deltaTime*4);
+			transform.position = Vector3.MoveTowards(transform.position,Planet.transform.position,Time.deltaTime*3);
 			if (curDistance > 100) {
 				GetComponent<Light>().color = normalLight;
 				detected = false;
