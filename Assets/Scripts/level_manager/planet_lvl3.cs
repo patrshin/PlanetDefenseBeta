@@ -16,6 +16,8 @@ public class planet_lvl3 : MonoBehaviour {
 
 	public bool lvl3 = false;
 	public bool lvl5 = false;
+	public bool lvl4 = false;
+	public bool lvl41 = false;
 
 	Vector3 contact_pos;
 
@@ -46,6 +48,28 @@ public class planet_lvl3 : MonoBehaviour {
 
 			if (transform.position.y < 0) {
 				temp.y = -160f;
+			}
+		}
+
+		if (lvl4) {
+			Vector3 expanded = transform.localScale;
+			if (expanded.x < 7) {
+				expanded.x += 0.05f;
+				expanded.y += 0.05f;
+				transform.localScale = expanded;
+				this.transform.Rotate(Vector3.forward * Time.deltaTime * 40f);
+			}
+			else {
+				if (transform.eulerAngles.z < 359f) {
+					Debug.Log(transform.eulerAngles.z);
+					this.transform.Rotate(Vector3.forward * Time.deltaTime * 80f);
+				}
+				else {
+					lvl4 = false;
+
+				}
+				GetComponent<AudioSource>().Stop();
+				lvl41 = true;
 			}
 		}
 

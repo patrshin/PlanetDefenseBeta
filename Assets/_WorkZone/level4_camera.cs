@@ -12,18 +12,21 @@ public class level4_camera : MonoBehaviour {
 
 	Vector3 planet_pos;
 	Vector3 jupiter_pos;
+	GameObject obj;
+
 
 	float timer = 0;
 	public bool load = false;
 
 	// Use this for initialization
 	void Start () {
-	
+		obj = GameObject.FindGameObjectWithTag ("Planet");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Jupiter == null && !scene_playing ) {
+		if (obj.GetComponent<planet_lvl3>().lvl41) {
+		if (Jupiter == null && !scene_playing) {
 			float step = speed * Time.deltaTime * 5;
 			planet_pos.x = Planet.transform.position.x;
 			planet_pos.y = Planet.transform.position.y;
@@ -59,6 +62,7 @@ public class level4_camera : MonoBehaviour {
 
 		if(load) {
 				Application.LoadLevel("Level_4_Real");
+		}
 		}
 	}
 }
