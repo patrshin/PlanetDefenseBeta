@@ -17,7 +17,7 @@ public class level2_script : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
 			
 			if (transform.localScale.x <= 427f)
