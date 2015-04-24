@@ -136,7 +136,6 @@ public class LaserPhysics2 : MonoBehaviour {
 						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
 							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
 							sphereHits2[i].transform.gameObject.GetComponent<StarFighter>().Health--;
-							sphereHits2[i].transform.gameObject.GetComponent<StarFighter>().damageIndicator();
 							GameObject o = (GameObject)Instantiate (sphereHits2[i].transform.gameObject.GetComponent<StarFighter>().explosionPrefab);
 							o.transform.position = sphereHits2[i].transform.gameObject.transform.position;
 						}
@@ -146,7 +145,6 @@ public class LaserPhysics2 : MonoBehaviour {
 						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
 							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
 							sphereHits2[i].transform.gameObject.GetComponent<StarFighter>().Health--;
-							sphereHits2[i].transform.gameObject.GetComponent<StarFighter>().damageIndicator();
 							GameObject o = (GameObject)Instantiate (sphereHits2[i].transform.gameObject.GetComponent<StarFighter>().explosionPrefab);
 							o.transform.position = sphereHits2[i].transform.gameObject.transform.position;
 						}
@@ -192,6 +190,22 @@ public class LaserPhysics2 : MonoBehaviour {
 							sphereHits2[i].transform.gameObject.GetComponent<AlienPlanet>().health.takeDamage(10);
 							GameObject o = (GameObject)Instantiate (sphereHits2[i].transform.gameObject.GetComponent<AlienPlanet>().explosionPrefab);
 							o.transform.position = sphereHits2[i].transform.gameObject.transform.position;
+						}
+					}
+				}
+
+				if(sphereHits2[i].transform.gameObject.CompareTag("shieldedShip")) {
+					if(playerNum == 0){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<Health>().takeDamage(10);
+						}
+					}
+					
+					if(playerNum == 1){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<Health>().takeDamage(10);
 						}
 					}
 				}
