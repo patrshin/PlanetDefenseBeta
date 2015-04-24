@@ -91,7 +91,7 @@ public class CreditsScript : MonoBehaviour {
 		"",
 		"Earth Texture/Material: Second Mouse Studios", 
 		"Sun Texture: NASA",
-		"",
+		"Miner & Boss Sprites: OpenGameArt.org",
 		"",
 		"",
 		"",
