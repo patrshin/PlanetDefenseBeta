@@ -56,6 +56,10 @@ public class PlanetSentinel : MonoBehaviour {
 			Application.LoadLevel ("level_5_Real");
 		}
 
+		if (Input.GetKey (KeyCode.Alpha6)) {
+			Application.LoadLevel ("Title");
+		}
+		
 		// hurt
 		if ((int)(hp.fillAmount * healthScale) != fixedHealth) {
 			PlanetHurt ();
