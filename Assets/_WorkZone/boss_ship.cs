@@ -78,7 +78,7 @@ public class boss_ship : MonoBehaviour {
 			shield_active = false;
 		}
 
-		if (hp <= shield_health){
+		if (hp <= shield_health && !lazoring){
 			ship_spwners.SetActive(true);
 			if(!shieldset) {
 				shield_active = true;
@@ -115,6 +115,9 @@ public class boss_ship : MonoBehaviour {
 
 		if(!lazoring) {
 			transform.position = Vector3.MoveTowards(transform.position, planet_pos, step);
+		}
+		if(lazoring) {
+			shield.SetActive(false);
 		}
 
 		if (spawn%4 == 0) {

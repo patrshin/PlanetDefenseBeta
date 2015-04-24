@@ -35,7 +35,9 @@ public class lvl5_boss : MonoBehaviour {
 	
 	public float shield_health;
 	public float ast_health;
-	
+
+	bool done;
+	float timer;
 	
 	// Use this for initialization
 	void Start () {
@@ -76,7 +78,18 @@ public class lvl5_boss : MonoBehaviour {
 			float step = speed * Time.deltaTime;
 			transform.position = Vector3.MoveTowards(transform.position, Vector3.zero, step);
 		}
-		
+
+		if(transform.position == Vector3.zero) {
+			done = true;
+		}
+
+		if(done){
+			timer += Time.deltaTime;
+
+			if (timer >= 1.2f)
+				Application.LoadLevel("level_5_Real");
+		}
+
 		
 		
 		if (hp <= ast_health){

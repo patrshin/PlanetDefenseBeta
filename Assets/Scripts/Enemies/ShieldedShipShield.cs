@@ -45,15 +45,5 @@ public class ShieldedShipShield : MonoBehaviour {
 			o.transform.position = c.gameObject.transform.position;
 
 		}
-
-		if(gameObject.tag == "shield") {
-			if (c.gameObject.tag == "Asteroid_P1" || c.gameObject.tag == "Asteroid_P2") {
-				Destroy(c.gameObject);
-				health--;
-			}
-		}
-
-
-
 	}
 }
