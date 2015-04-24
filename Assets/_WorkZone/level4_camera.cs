@@ -34,7 +34,7 @@ public class level4_camera : MonoBehaviour {
 				timer += Time.deltaTime;
 			}
 
-			if(timer > 1) {
+			if(timer > 0.01) {
 				load = true;
 			}
 		}
