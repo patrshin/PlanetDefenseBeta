@@ -36,21 +36,7 @@ public class planet_lvl3 : MonoBehaviour {
 	void Update() {
 
 		if (endLevel3) {		
-			if (Level3EndDuration < Level3Endtimer) {
-				Application.LoadLevel("level_4_Intro");
-			}
-			else {
-				/*if (Level3EndDuration/2 < Level3Endtimer) {
-					Transform[] allChildren = GetComponentsInChildren<Transform>();
-					foreach (Transform child in allChildren) {
-						if (child.name == "Main Camera") {
-							child.parent = null;
-						}
-					}	
-				}*/
-				transform.position = transform.position + Vector3.right*50;
-				Level3Endtimer += Time.deltaTime;
-			}
+			Application.LoadLevel("level_4_Intro");
 		}
 
 		if(lvl3){
