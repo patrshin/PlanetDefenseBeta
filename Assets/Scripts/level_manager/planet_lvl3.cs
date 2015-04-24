@@ -36,7 +36,7 @@ public class planet_lvl3 : MonoBehaviour {
 	void Update() {
 
 		if (endLevel3) {		
-			Application.LoadLevel("level_4_Intro");
+			Application.LoadLevel("level_3_Outro");
 		}
 
 		if(lvl3){

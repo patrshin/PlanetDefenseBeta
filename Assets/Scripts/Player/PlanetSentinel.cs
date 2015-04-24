@@ -197,7 +197,7 @@ public class PlanetSentinel : MonoBehaviour {
 			GameObject.FindObjectOfType<Camera> ().gameObject.transform.localPosition = 
 				baseLocation + additive;
 		} else {
-			Debug.Log (additive);
+			//Debug.Log (additive);
 			GameObject.FindObjectOfType<Camera> ().gameObject.transform.position = 
 				baseLocation + additive;
 

@@ -92,6 +92,13 @@ public class Projectile : MonoBehaviour {
 			Destroy (this.gameObject);
 		}
 
+		if (other.gameObject.tag == "Boss2") {
+			GameObject o = (GameObject)Instantiate (explosionPrefab);
+			o.transform.position = gameObject.transform.position;
+			other.gameObject.GetComponent<lvl5_boss>().hp--;
+			Destroy (this.gameObject);
+		}
+
 		for(int i = 0; i < targetTags.Length; ++i) {
 			if (other.gameObject.tag == targetTags[i]) {
 				other.gameObject.GetComponent<Health>().takeDamage(targetDamage[i]);
