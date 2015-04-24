@@ -4,6 +4,7 @@ using System.Collections;
 public class enemy_lazer_physics : MonoBehaviour {
 
 	public LayerMask collisionMask;
+	public LayerMask collisionMask2;
 	public GameObject boss;
 
 	public float ray_length;
@@ -55,9 +56,12 @@ public class enemy_lazer_physics : MonoBehaviour {
 			if (!hit.transform.gameObject.GetComponent<PlanetLaserBehavior>().god_mode1) {
 				hit.transform.gameObject.GetComponent<PlanetLaserBehavior>().hit1 = true;
 				hit.transform.gameObject.GetComponent<PlanetSentinel>().hp.fillAmount -= 0.2f;
-				
 			}
-			
+		}
+
+		if(Physics.SphereCast (ray, ray_radius, out hit, ray_length, collisionMask2)) {
+			if(!hit.transform.gameObject.GetComponent<lvl5_jupiter>().god_mode)
+				hit.transform.gameObject.GetComponent<lvl5_jupiter>().hit = true;			
 		}
 
 	}
