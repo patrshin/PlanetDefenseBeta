@@ -33,6 +33,14 @@ public class boss_ship : MonoBehaviour {
 	public float shield_health;
 	public float ast_health;
 
+	public Color defaultColor;
+	Color origColor;
+	private bool colorChanged = false;
+	bool hurtAnimationActive = false;
+	SpriteRenderer rend;
+	public Color hitColor;
+	public float colorChangeCooldown = 1f;
+	private float colorChangeTimer;
 
 	// Use this for initialization
 	void Start () {
@@ -40,6 +48,7 @@ public class boss_ship : MonoBehaviour {
 		fire = true;
 		lazer_time = lazer_cd;
 		start_hp = hp;
+		rend = GetComponent<SpriteRenderer> ();
 	}
 	
 	// Update is called once per frame
@@ -128,7 +137,19 @@ public class boss_ship : MonoBehaviour {
 			fire = false;
 		}
 
+		if (colorChanged) {
+			colorChangeTimer += Time.deltaTime;
+			if (colorChangeTimer > colorChangeCooldown) {
+				rend.color = defaultColor;
+				colorChanged = false;
+				colorChangeTimer = 0f;
+				hurtAnimationActive = false;
+			}
+		}
 
+		if (hurtAnimationActive) {
+			rend.color = Color.Lerp(rend.color, origColor, 0.1f);
+		}
 	
 	}
 
@@ -203,6 +224,24 @@ public class boss_ship : MonoBehaviour {
 			break;
 		}
 
+	}
+
+	public void damageIndicator() {
+		colorChanged = true;
+
+		rend.color = hitColor;
+
+
+		PlanetHurt ();
+	}
+
+	void PlanetHurt() {
+		if (hurtAnimationActive) {
+			rend.color = origColor;
+		}
+		origColor = rend.color;
+		rend.color = Color.red;
+		hurtAnimationActive = true;
 	}
 
 

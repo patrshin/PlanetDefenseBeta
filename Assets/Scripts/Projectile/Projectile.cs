@@ -89,6 +89,7 @@ public class Projectile : MonoBehaviour {
 			GameObject o = (GameObject)Instantiate (explosionPrefab);
 			o.transform.position = gameObject.transform.position;
 			other.gameObject.GetComponent<boss_ship>().hp--;
+			other.gameObject.GetComponent<boss_ship>().damageIndicator();
 			Destroy (this.gameObject);
 		}
 

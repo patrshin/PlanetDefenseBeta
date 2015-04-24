@@ -84,7 +84,7 @@ public class LaserPhysics2 : MonoBehaviour {
 			for(int i = 0; i<sphereHits.Length; i++)
 			{
 				if(playerNum == 0){
-					if(sphereHits[i].transform.tag != "Boss") {
+					if(sphereHits[i].transform.tag != "shield") {
 						if (!sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
 							sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
 							sphereHits[i].transform.gameObject.GetComponent<Health>().takeDamage(25);
@@ -95,7 +95,7 @@ public class LaserPhysics2 : MonoBehaviour {
 				}
 					
 				if(playerNum == 1){
-					if(sphereHits[i].transform.tag != "Boss") {
+					if(sphereHits[i].transform.tag != "shield") {
 						if (!sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
 							sphereHits[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
 							sphereHits[i].transform.gameObject.GetComponent<Health>().takeDamage(25);
@@ -190,6 +190,24 @@ public class LaserPhysics2 : MonoBehaviour {
 							sphereHits2[i].transform.gameObject.GetComponent<AlienPlanet>().health.takeDamage(10);
 							GameObject o = (GameObject)Instantiate (sphereHits2[i].transform.gameObject.GetComponent<AlienPlanet>().explosionPrefab);
 							o.transform.position = sphereHits2[i].transform.gameObject.transform.position;
+						}
+					}
+				}
+
+				if(sphereHits2[i].transform.gameObject.CompareTag("Boss")) {
+					if(playerNum == 0){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode1){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit1 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<boss_ship>().damageIndicator();
+							sphereHits2[i].transform.gameObject.GetComponent<boss_ship>().hp--;
+						}
+					}
+					
+					if(playerNum == 1){
+						if (!sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().god_mode2){
+							sphereHits2[i].transform.gameObject.GetComponent<EnemyLaserBehavior>().hit2 = true;
+							sphereHits2[i].transform.gameObject.GetComponent<boss_ship>().damageIndicator();
+							sphereHits2[i].transform.gameObject.GetComponent<boss_ship>().hp--;
 						}
 					}
 				}
