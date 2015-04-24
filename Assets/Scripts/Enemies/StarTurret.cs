@@ -83,7 +83,7 @@ public class StarTurret : MonoBehaviour {
 		}
 		else {
 			activeTimer += Time.deltaTime;
-			Debug.Log (activeTimer);
+			//Debug.Log (activeTimer);
 
 			//if planet is far away move towards it
 			if (planetDistance > 20) {
