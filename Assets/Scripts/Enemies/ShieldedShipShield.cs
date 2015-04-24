@@ -25,7 +25,7 @@ public class ShieldedShipShield : MonoBehaviour {
 			baseZ
 		);
 
-		if(gameObject.tag == "shield") {
+		if(gameObject.tag == "shield2") {
 			if (health <= 0) {
 				gameObject.transform.root.gameObject.GetComponent<boss_ship>().shield_active = false;
 				//gameObject.transform.parent.gameObject.SetActive(false);
